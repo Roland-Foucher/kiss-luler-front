@@ -1,0 +1,19 @@
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+
+@layer components{
+    .buttonForm{
+        @apply bg-gray-300 text-white font-bold uppercase text-sm text-[#9a031e] px-4 py-2 rounded shadow   
+    }
+    .buttonForm:hover{
+        @apply shadow-lg outline-none ring-2 ring-[#9a031e]
+    }
+    .buttonForm:focus{
+        @apply outline-none mr-1 mb-1 ease-linear transition-all duration-150
+    }
+
+
+    
+}
