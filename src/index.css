@@ -13,7 +13,5 @@
     .buttonForm:focus{
         @apply outline-none mr-1 mb-1 ease-linear transition-all duration-150
     }
-
-
     
 }
