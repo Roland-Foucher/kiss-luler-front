@@ -12,21 +12,22 @@ export default function CategoriesCards() {
         <>
 
             <header className="flex font-light">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 rotate-45 text-redBull" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                    <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                 </svg>
                 <h2 className="ml-2 font-newFont text-xl ">Catégories</h2>
             </header>
-            <body>
+            <section>
                 <article className="grid grid-flow-col auto-cols-3 mx-16 my-4">
 
-                    {inWaitProject.map((item) => <div className=" bg-orangeBull/30 p-4 flex items-end justify-center h-36 w-36 rounded-bl-3xl rounded-tr-3xl shadow-md hover:shadow-lg hover:-translate-y-3 hover:duration-500">
+                    {inWaitProject.map((item) => <div className=" border border-gray-600 bg-orangeBull/70 p-4 flex items-end justify-center h-36 w-36 rounded-bl-3xl rounded-tr-3xl shadow-md hover:shadow-lg hover:-translate-y-3 hover:duration-500">
 
-                            <p className="font-newFont">{item} </p>
+                        <p className="font-newFont">{item} </p>
                     </div>)}
                 </article>
 
-            </body>
+            </section>
         </>
     )
 }
