@@ -13,8 +13,12 @@ module.exports = {
         'yellowBull': '#f7b267',
         'brownNakala': '#544D51',
         
+      },
+      fontFamily: {
+        'newFont' : [ 'Rajdhani', 'sans-serif']
       }
     },
+    
     screens: {
       sm: '640px',
       md: '768px',
