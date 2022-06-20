@@ -8,6 +8,8 @@ export default function CategoriesCards() {
 
     let inWaitProject = ["Pop/Rock", "Alternative", "Funk/Tribal", "Metal/Hardcore", "Classico/Classique"]
 
+    //rounded-bl-3xl rounded-tr-3xl style corner
+
     return (
         <>
 
@@ -17,13 +19,14 @@ export default function CategoriesCards() {
                     <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                 </svg>
                 <h2 className="ml-2 font-newFont text-xl ">Catégories</h2>
+               
             </header>
             <section>
                 <article className="grid grid-flow-col auto-cols-3 mx-16 my-4">
 
-                    {inWaitProject.map((item) => <div className=" border border-gray-600 bg-orangeBull/70 p-4 flex items-end justify-center h-36 w-36 rounded-bl-3xl rounded-tr-3xl shadow-md hover:shadow-lg hover:-translate-y-3 hover:duration-500">
+                    {inWaitProject.map((item) => <div className=" contrast-150 bg-gradient-to-b from-redBull to-yellowBull opacity-75 rounded-md   flex items-end justify-center h-24 w-36  shadow-md hover:shadow-lg hover:-translate-y-3 hover:duration-500">
 
-                        <p className="font-newFont">{item} </p>
+                        <p className="translate-y-3 translate-x-6 font-newFont  text-white p-2 rounded-md border-b border-orangeBull border-r border-orangeBull">{item} </p>
                     </div>)}
                 </article>
 

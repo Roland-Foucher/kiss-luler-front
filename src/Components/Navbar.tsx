@@ -17,7 +17,7 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   return (
     <>
-      <Disclosure as="nav" className="bg-gray-200 border-b border-red-400">
+      <Disclosure as="nav" className="bg-black/80 border-b border-red-400">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -119,7 +119,7 @@ export default function Navbar() {
 
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button className='bg-[#f4845f]/40 rounded-md shadow-md p-2 text-sm text-white hover:bg-[#f4845f] hover:duration-500'>
+                  <button className='bg-orangeBull rounded-md shadow-md p-2 text-sm text-white hover:bg-orangeBull/40 hover:duration-500'>
                     Se connecter
                   </button>
                   {/* Profile dropdown */}

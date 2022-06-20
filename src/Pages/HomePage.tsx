@@ -13,7 +13,7 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="mx-5 mt-12">
+            <div className=" mx-5 mt-12">
                 <CategoriesCards />
                 <ProjectsCards/>
             </div>
