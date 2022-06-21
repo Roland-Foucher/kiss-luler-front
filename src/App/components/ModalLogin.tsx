@@ -19,7 +19,7 @@ export default function ModalLogin() {
     console.log(data);
     if (data) {
       dispatch(setCredentials(data));
-    } 
+    }
   }
 
   const handleChange = (event: React.FormEvent<EventTarget>) => {
@@ -37,10 +37,12 @@ export default function ModalLogin() {
     <>
 
 
-      <div onClick={() => setShowModal(true)} >
+      {/* <div onClick={() => setShowModal(true)} >
         <img className="cursor-pointer inline-block object-cover w-12 h-12 rounded-full avatar avatar-48 text-white  rounded-circle p-2"
           src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" alt="profile"></img>
-      </div>
+      </div> */}
+
+      <button onClick={()=> setShowModal(true)} className=" ml-4 w-20 rounded-md  p-2 text-sm text-grey-600 shadow-md hover:text-white  hover:bg-gray-600 hover:duration-500 bg-gray-200 p-2">Créer</button>
 
       {showModal ? (
 
@@ -119,8 +121,8 @@ export default function ModalLogin() {
                           className="group relative w-full flex justify-center py-2 px-4   font-light text-md text-white   rounded-md bg-red-500 opacity-90 hover:opacity-100 hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
 
                         >
-                          
-                            Me connecter
+
+                          Me connecter
                         </button>
 
                         {postQuery.isError && <p>{(postQuery.error as any).data.error}</p>
