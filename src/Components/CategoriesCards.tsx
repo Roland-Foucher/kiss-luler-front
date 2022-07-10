@@ -26,7 +26,7 @@ export default function CategoriesCards() {
 
                     {inWaitProject.map((item) => <div className=" contrast-150 bg-gradient-to-b from-redBull to-yellowBull opacity-75 rounded-md   flex items-end justify-center h-24 w-36  shadow-md hover:shadow-lg hover:-translate-y-3 hover:duration-500">
 
-                        <p className="translate-y-3 translate-x-6 font-newFont  text-white p-2 rounded-md border-b border-orangeBull border-r border-orangeBull">{item} </p>
+                        <p className="translate-y-3 translate-x-6 font-newFont  text-gray-600 font-bold p-2 rounded-md border-b border-orangeBull border-r border-orangeBull">{item} </p>
                     </div>)}
                 </article>
 
