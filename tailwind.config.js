@@ -1,11 +1,24 @@
 module.exports = {
-  
+
   mode: "jit",
-  
+
   content: ["./src/**/*.{js,jsx,ts,tsx}",],
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
+    extend: {
+      colors: {
+        'redBull': '#f25c54',
+        'orangeBull': '#f4845f',
+        'yellowBull': '#f7b267',
+        'brownNakala': '#544D51',
+        
+      },
+      fontFamily: {
+        'newFont' : [ 'Rajdhani', 'sans-serif']
+      }
+    },
+    
     screens: {
       sm: '640px',
       md: '768px',
@@ -13,7 +26,7 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
-    
+
     colors: ({ colors }) => ({
       inherit: colors.inherit,
       current: colors.current,

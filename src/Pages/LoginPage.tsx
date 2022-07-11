@@ -1,4 +1,5 @@
-import ModalLogin from "../components/ModalLogin";
+import ModalLogin from "../Components/ModalLogin";
+
 
 
 export function LoginPage() {
