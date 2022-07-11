@@ -3,6 +3,7 @@ import { LoginPage } from './App/pages/LoginPage';
 import './index.css'
 import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
+import Footer from './Components/Footer';
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
