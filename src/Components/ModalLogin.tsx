@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useUserLoginMutation } from "../API/authAPI";
-import { User } from "../entities/login";
+
 import { FloatingLabel, FormControl } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../API/auth-slice";
+import { setCredentials } from "../App/API/auth-slice";
+import { useUserLoginMutation } from "../App/API/authAPI";
+import { User } from "../App/entities/login";
+
 
 export default function ModalLogin() {
 
