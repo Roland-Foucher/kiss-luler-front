@@ -7,12 +7,6 @@ import { Project } from "../App/entities/project";
 
 
 
-
-
-
-
-
-
 export default function ProjectsCards() {
 
     const { data, isError } = useGetAllProjectsQuery()
@@ -34,10 +28,10 @@ export default function ProjectsCards() {
                 <article className="grid grid-cols-3 gap-4 mt-5">
                     {data && data!.map((item: Project) => <a
 
-                        className="block p-4 rounded-lg shadow-sm shadow-redBull hover:shadow-md hover:shadow-redBull/30"
+                        className="block p-4 rounded-lg  shadow-lg hover:shadow-md hover:shadow-redBull/30"
                     >
-                         <div className=" translate-y-4 mt-2  flex justify-end">
-                            <strong className=" border border-red-500 text-red-500 bg-red-100 uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide">
+                        <div className=" translate-y-4 mt-2  flex justify-end">
+                            <strong className=" border border-red-500 text-red-500 bg-red-100 uppercase px-5 py-1.5 rounded-lg text-[10px] tracking-wide">
                                 {item.category}
                             </strong>
                         </div>
@@ -46,9 +40,9 @@ export default function ProjectsCards() {
                             src="https://images.unsplash.com/photo-1554995207-c18c203602cb"
                             className="object-cover w-full h-56 rounded-md"
                         />
-                       
 
-                        <div className="mt-2">
+
+                        <div className="mt-2 relative">
                             <dl>
                                 <div>
                                     <dt className="sr-only">
@@ -110,6 +104,9 @@ export default function ProjectsCards() {
                                     </div>
                                 </div>
                             </dl>
+                            <button className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+                                Voir
+                            </button>
                         </div>
                     </a>)}
                 </article>
