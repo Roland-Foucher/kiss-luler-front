@@ -1,22 +1,18 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { AuthState } from './auth-slice';
-import { User } from '../entities/login';
+import { LoginDTO, User } from '../entities/login';
 import { prepare } from '../utils/token';
 
-export interface Credentials{
-    email:string;
-    password:string;
-}
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    tagTypes: ['Post','user'], 
+    tagTypes: ['Post','User'], 
     baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_SERVER_URL +'/api/user', prepareHeaders: prepare}),
     endpoints: (builder) => ({
 
         getThisUser: builder.query<User, void>({
             query: ()=> '/account',
-            providesTags: ['user']
+            providesTags: ['User']
         }),
         // getAllUsers: builder.query<Project[], void>({
         //     query:()=>({
@@ -29,13 +25,13 @@ export const authApi = createApi({
         //         url: '/' +id
         //     })
         // }),
-        userLogin: builder.mutation<AuthState, User>({
+        userLogin: builder.mutation<AuthState, LoginDTO>({
             query:(body)=>({
                 url: '/login',
                 method: 'POST',
                 body
             }),
-            invalidatesTags:['user', 'Post']
+            invalidatesTags:['User', 'Post']
 
         }),
         userRegister: builder.mutation<AuthState, FormData>({
@@ -44,7 +40,7 @@ export const authApi = createApi({
                 method: 'POST',
                 body
             }),
-            invalidatesTags:['user']
+            invalidatesTags:['User']
         })
     })
 })

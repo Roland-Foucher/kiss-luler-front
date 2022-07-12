@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../entities/login';
 import { RootState } from '../store';
 import { authApi } from '../API/authAPI';
 
 
 export interface AuthState {
-  user?: User | null,
+  username?: string | null,
   token?: string | null,
   isAuthenticated: boolean,
 };
 
 const initialState: AuthState = {
-  user: null,
+  username: null,
   token: null,
   isAuthenticated: false,
 };
@@ -21,22 +20,23 @@ export const slice = createSlice({
   initialState,
   reducers: {
     setCredentials: (
-      state, { payload: { user, token } }: PayloadAction<AuthState>
+      state, { payload: { username, token } }: PayloadAction<AuthState>
     ) => {
-      state.user = user
+      state.username = username
       state.token = token
       localStorage.setItem('token', String(token))
     },
     logout(state) {
-      state.user = null;
+      state.username = null;
       localStorage.removeItem('token');
     }
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.getThisUser.matchFulfilled,
+      .addMatcher(authApi.endpoints.userLogin.matchFulfilled,
         (state, { payload }) => {
-          state.user = payload
+          state.username = payload.username;
+          state.token = payload.token;
         }
       )
   }
@@ -46,4 +46,4 @@ export const { setCredentials, logout } = slice.actions
 
 export default slice.reducer
 
-export const selectCurrentUser = (state: RootState) => state.auth.user
+export const selectCurrentUser = (state: RootState) => state.auth.username
