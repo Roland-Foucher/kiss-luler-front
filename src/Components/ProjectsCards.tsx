@@ -1,9 +1,6 @@
-
-
-
-
-
-
+import { useNavigate } from "react-router";
+import { useGetAllProjectsQuery } from "../App/API/projects"
+import { Project } from "../App/entities/project";
 
 
 
@@ -12,6 +9,11 @@
 
 
 export default function ProjectsCards() {
+
+    const { data, isError } = useGetAllProjectsQuery()
+    const navigate = useNavigate()
+    console.log(data);
+
 
     let inWaitProjects = ["je suis un projet", "je suis un deuxieme projet", "je suis un troisieme projet", "je suis un quatrième projet", "je suis un cinquième projet"]
 
@@ -26,17 +28,23 @@ export default function ProjectsCards() {
             </header>
             <section>
                 <article className="grid grid-cols-3 gap-4 mt-5">
-                    {inWaitProjects.map((item) => <a
-                        href=""
-                        className="block p-4 rounded-lg shadow-sm shadow-redBull hover:shadow-md hover:shadow-redBull/30"
+                    {data && data!.map((item: Project) => <a
+
+                        className="block p-4  shadow-lg hover:shadow-md hover:shadow-redBull/30"
                     >
+                        <div className=" translate-y-4 mt-2  flex justify-end">
+                            <strong className=" border border-red-500 text-red-500 bg-red-100 uppercase px-5 py-1.5 rounded-lg text-[10px] tracking-wide">
+                                {item.category}
+                            </strong>
+                        </div>
                         <img
                             alt="123 Wallaby Avenue, Park Road"
                             src="https://images.unsplash.com/photo-1554995207-c18c203602cb"
                             className="object-cover w-full h-56 rounded-md"
                         />
 
-                        <div className="mt-2">
+
+                        <div className="mt-2 relative">
                             <dl>
                                 <div>
                                     <dt className="sr-only">
@@ -44,7 +52,7 @@ export default function ProjectsCards() {
                                     </dt>
 
                                     <dd className="font-medium">
-                                        {item}
+                                        {item.title}
                                     </dd>
                                 </div>
 
@@ -54,69 +62,53 @@ export default function ProjectsCards() {
                                     </dt>
 
                                     <dd className="text-sm text-gray-500 ml-4">
-                                        Par Jean Charles
+                                        Par {item.userName}
                                     </dd>
                                 </div>
                             </dl>
 
                             <dl className="flex items-center mt-6 space-x-8 text-xs">
                                 <div className="sm:inline-flex sm:items-center sm:shrink-0">
-                                    <svg
-                                        className="w-4 h-4 text-indigo-700"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+
+
+
+                                </div>
+
+                                <div className="sm:inline-flex sm:items-center sm:shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.121 15.536c-1.171 1.952-3.07 1.952-4.242 0-1.172-1.953-1.172-5.119 0-7.072 1.171-1.952 3.07-1.952 4.242 0M8 10.5h4m-4 3h4m9-1.5a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
 
                                     <div className="sm:ml-3 mt-1.5 sm:mt-0">
                                         <dt className="text-gray-500">
-                                            Parking
+                                            Contributions
                                         </dt>
 
                                         <dd className="font-medium">
-                                            2 spaces
+                                            {item.considerations_amount}
                                         </dd>
                                     </div>
                                 </div>
 
                                 <div className="sm:inline-flex sm:items-center sm:shrink-0">
-                                    <svg
-                                        className="w-4 h-4 text-indigo-700"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
 
                                     <div className="sm:ml-3 mt-1.5 sm:mt-0">
                                         <dt className="text-gray-500">
-                                            Bathroom
+                                            Date
                                         </dt>
 
                                         <dd className="font-medium">
-                                            2 rooms
-                                        </dd>
-                                    </div>
-                                </div>
-
-                                <div className="sm:inline-flex sm:items-center sm:shrink-0">
-                                    <svg
-                                        className="w-4 h-4 text-indigo-700"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
-
-                                    <div className="sm:ml-3 mt-1.5 sm:mt-0">
-                                        <dt className="text-gray-500">
-                                            Bedroom
-                                        </dt>
-
-                                        <dd className="font-medium">
-                                            4 rooms
+                                            {item.date}
                                         </dd>
                                     </div>
                                 </div>
                             </dl>
+                            <button onClick={()=> navigate(`project/${item.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+                                Voir
+                            </button>
                         </div>
                     </a>)}
                 </article>

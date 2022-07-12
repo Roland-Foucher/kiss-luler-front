@@ -5,10 +5,13 @@ import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
 import { LoginPage } from './Pages/LoginPage';
+import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 
 
 
-//bloup
+export type RouterParams  = {
+  id: string
+}
 
 
 function App() {
@@ -20,8 +23,9 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/project/:id" element={<OneProjectDetailPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
