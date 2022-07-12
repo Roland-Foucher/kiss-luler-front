@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { FloatingLabel, FormControl } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../App/API/auth-slice";
 import { useUserLoginMutation } from "../App/API/authAPI";
 import { User } from "../App/entities/login";
 
@@ -9,7 +7,6 @@ import { User } from "../App/entities/login";
 export default function ModalLogin() {
 
   const [showModal, setShowModal] = React.useState(false);
-  const dispatch = useDispatch();
 
   const [postLogin, postQuery] = useUserLoginMutation();
   const [form, setForm] = useState<User>({} as User);

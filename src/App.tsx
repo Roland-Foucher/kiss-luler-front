@@ -9,7 +9,9 @@ import { RegisterPage } from './Pages/RegisterPage';
 
 
 
-//bloup
+export type RouterParams  = {
+  id: string
+}
 
 
 function App() {
@@ -22,8 +24,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/project/:id" element={<OneProjectDetailPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
