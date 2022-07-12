@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useGetAllProjectsQuery } from "../App/API/projects"
 import { Project } from "../App/entities/project";
 
@@ -10,6 +11,7 @@ import { Project } from "../App/entities/project";
 export default function ProjectsCards() {
 
     const { data, isError } = useGetAllProjectsQuery()
+    const navigate = useNavigate()
     console.log(data);
 
 
@@ -28,7 +30,7 @@ export default function ProjectsCards() {
                 <article className="grid grid-cols-3 gap-4 mt-5">
                     {data && data!.map((item: Project) => <a
 
-                        className="block p-4 rounded-lg  shadow-lg hover:shadow-md hover:shadow-redBull/30"
+                        className="block p-4  shadow-lg hover:shadow-md hover:shadow-redBull/30"
                     >
                         <div className=" translate-y-4 mt-2  flex justify-end">
                             <strong className=" border border-red-500 text-red-500 bg-red-100 uppercase px-5 py-1.5 rounded-lg text-[10px] tracking-wide">
@@ -83,7 +85,7 @@ export default function ProjectsCards() {
                                         </dt>
 
                                         <dd className="font-medium">
-                                            {item.considerations}
+                                            {item.considerations_amount}
                                         </dd>
                                     </div>
                                 </div>
@@ -104,7 +106,7 @@ export default function ProjectsCards() {
                                     </div>
                                 </div>
                             </dl>
-                            <button className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+                            <button onClick={()=> navigate(`project/${item.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
                                 Voir
                             </button>
                         </div>

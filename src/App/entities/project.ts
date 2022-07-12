@@ -5,7 +5,7 @@ export interface Project {
     userName?: string;
     photo?: string;
     category?: string;
-    considerations?: number,
+    considerations_amount?: number,
     date?: string;
 
 }

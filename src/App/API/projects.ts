@@ -17,7 +17,12 @@ export const projectApi = createApi({
             query: () => '/',
             providesTags: ['projectsList']
         }),
+
+        getOneProject: builder.query<Project, number>({
+            query:(id)=> '/'+ id,
+            providesTags: ['projectsList']
+        })
     })
 })
 
-export  const { useGetAllProjectsQuery } = projectApi;
+export  const { useGetAllProjectsQuery, useGetOneProjectQuery } = projectApi;
