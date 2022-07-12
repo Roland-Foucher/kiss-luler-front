@@ -5,7 +5,7 @@ import Navbar from './Components/Navbar';
 import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
 import { LoginPage } from './Pages/LoginPage';
-import OneProjectDetailPage from './Pages/OneProjectDetailPage';
+import { RegisterPage } from './Pages/RegisterPage';
 
 
 
@@ -22,6 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<OneProjectDetailPage />} />
       </Routes>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { FloatingLabel, FormControl } from "react-bootstrap";
 import { useUserLoginMutation } from "../App/API/authAPI";
 import { User } from "../App/entities/login";
@@ -15,7 +14,9 @@ export default function ModalLogin() {
   const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
     const data = await postLogin(form).unwrap();
-    console.log(data);
+    if (data) {
+      dispatch(setCredentials(data));
+    }
   }
 
   const handleChange = (event: React.FormEvent<EventTarget>) => {
@@ -28,22 +29,16 @@ export default function ModalLogin() {
     setForm(change)
   }
   return (
-
-
     <>
 
+{      /*<button onClick={() => setShowModal(true)} className=" ml-4 w-20 rounded-md  p-2 text-sm text-grey-600 shadow-md hover:text-white  hover:bg-gray-600 hover:duration-500 bg-gray-200 p-2">Créer</button>*/}
 
-      {/* <div onClick={() => setShowModal(true)} >
-        <img className="cursor-pointer inline-block object-cover w-12 h-12 rounded-full avatar avatar-48 text-white  rounded-circle p-2"
-          src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" alt="profile"></img>
-      </div> */}
-
-      <button onClick={()=> setShowModal(true)} className=" ml-4 w-20 rounded-md  p-2 text-sm text-grey-600 shadow-md hover:text-white  hover:bg-gray-600 hover:duration-500 bg-gray-200 p-2">Créer</button>
+      <button onClick={() => setShowModal(true)} className='bg-orangeBull rounded-md shadow-md p-2 text-sm text-white hover:bg-orangeBull/40 hover:duration-500'>
+        Se connecter
+      </button>
 
       {showModal ? (
-
         <>
-
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
@@ -115,9 +110,7 @@ export default function ModalLogin() {
                         <button
                           type="submit"
                           className="group relative w-full flex justify-center py-2 px-4   font-light text-md text-white   rounded-md bg-red-500 opacity-90 hover:opacity-100 hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
-
                         >
-
                           Me connecter
                         </button>
 
