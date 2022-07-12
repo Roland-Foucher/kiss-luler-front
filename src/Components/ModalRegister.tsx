@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { FloatingLabel, FormControl } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../App/API/auth-slice";
+
 import { useUserRegisterMutation } from "../App/API/authAPI";
 import { User } from "../App/entities/login";
 
@@ -20,9 +20,7 @@ export default function ModalLogin() {
         console.log(form)
         const data = await postRegister(form).unwrap();
         console.log(data);
-        if (data) {
-            dispatch(setCredentials(data));
-        }
+        
     }
 
     const handleChange = (event: React.FormEvent<EventTarget>) => {

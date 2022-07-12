@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice} from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { authApi, useGetThisUserQuery } from '../API/authAPI';
+import { authApi } from '../API/authAPI';
 import { User } from '../entities/login';
 
 

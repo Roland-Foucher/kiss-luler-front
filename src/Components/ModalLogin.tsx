@@ -14,9 +14,7 @@ export default function ModalLogin() {
   const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
     const data = await postLogin(form).unwrap();
-    if (data) {
-      dispatch(setCredentials(data));
-    }
+    
   }
 
   const handleChange = (event: React.FormEvent<EventTarget>) => {

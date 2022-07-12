@@ -6,6 +6,7 @@ import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
 import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
+import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 
 
 
