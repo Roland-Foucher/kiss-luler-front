@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Banners from './Banners'
+import ModalLogin from './ModalLogin'
 
 const navigation = [
   { name: 'Mulule', href: '#', current: true },
@@ -119,9 +120,7 @@ export default function Navbar() {
 
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button className='bg-orangeBull rounded-md shadow-md p-2 text-sm text-white hover:bg-orangeBull/40 hover:duration-500'>
-                    Se connecter
-                  </button>
+                      <ModalLogin/>
                   {/* Profile dropdown */}
                   {/* <Menu as="div" className="ml-3 relative">
                     <div>

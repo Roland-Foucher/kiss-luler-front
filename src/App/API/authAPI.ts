@@ -34,9 +34,9 @@ export const authApi = createApi({
             invalidatesTags:['User', 'Post']
 
         }),
-        userRegister: builder.mutation<AuthState, FormData>({
+        userRegister: builder.mutation<AuthState, User>({
             query: (body)=>({
-                url:'/register',
+                url:'/',
                 method: 'POST',
                 body
             }),
