@@ -5,7 +5,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Banners from './Banners'
 import ModalLogin from './ModalLogin'
-import { useAppSelector } from '../App/hooks'
+import { useAppDispatch, useAppSelector } from '../App/hooks'
+import { useSelector } from 'react-redux'
+import { logout } from '../App/API/auth-slice'
 
 
 const navigation = [
@@ -20,6 +22,8 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
 
   let user = useAppSelector(state => state.auth.user);
+  
+  const dispatch = useAppDispatch ();
   
   return (
     <>
@@ -162,12 +166,12 @@ export default function Navbar() {
                         
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              onClick = {() => dispatch(logout())}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Déconnexion
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>
