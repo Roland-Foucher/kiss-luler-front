@@ -6,7 +6,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Banners from './Banners'
 import ModalLogin from './ModalLogin'
 import { useAppSelector } from '../App/hooks'
-import { useNavigate } from 'react-router'
+
 
 const navigation = [
   { name: 'Mulule', href: '#', current: true },
