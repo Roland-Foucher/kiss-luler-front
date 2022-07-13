@@ -8,6 +8,7 @@ import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
 import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 import AccountPage from './Pages/AccountPage';
+import ProtectedRoute from './App/ProtectedRoute';
 
 
 
@@ -27,7 +28,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<OneProjectDetailPage />} />
-        <Route path="/account" element={<AccountPage />} />
+        <Route element ={ <ProtectedRoute><AccountPage /></ProtectedRoute>} path={"/account"} />
+      
       </Routes>
       <Footer />
     </BrowserRouter>

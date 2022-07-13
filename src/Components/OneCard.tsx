@@ -85,7 +85,7 @@ export default function OneCard({project} : Props) {
               </div>
             </div>
           </dl>
-          <button onClick={() => navigate(`project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+          <button onClick={() => navigate(`/project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
             Voir
           </button>
         </div>

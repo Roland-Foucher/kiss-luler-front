@@ -11,8 +11,8 @@ export interface AuthState {
 };
 
 const initialState: AuthState = {
-  user: null,
-  token: null,
+  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null,
+  token: localStorage.getItem('token'),
   isAuthenticated: false,
 };
 
@@ -24,15 +24,20 @@ export const slice = createSlice({
       state.user = null;
       state.token = null;
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
   },
+
   extraReducers: (builder) => {
     builder
       .addMatcher(authApi.endpoints.userLogin.matchFulfilled,
         (state, { payload }) => {
           state.token = payload.token;
           state.user = payload.user;
-          localStorage.setItem('token', String(state.token))
+          localStorage.setItem('token', String(state.token));
+          localStorage.setItem('user', JSON.stringify(state.user));
+          console.log(state.token);
+          
         }
       )
   }

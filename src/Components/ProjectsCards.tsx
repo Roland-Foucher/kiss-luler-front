@@ -7,7 +7,6 @@ import OneCard from "./OneCard";
 export default function ProjectsCards() {
 
     const { data, isError } = useGetAllProjectsQuery()
-    const navigate = useNavigate()
     console.log(data);
 
 
