@@ -1,3 +1,5 @@
+import { Considerations } from "./considerations";
+
 export interface Project {
 
     id?: string;
@@ -7,5 +9,6 @@ export interface Project {
     category?: string;
     considerations_amount?: number,
     date?: string;
+    consideration?: Considerations[];
 
 }
