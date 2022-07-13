@@ -6,6 +6,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Banners from './Banners'
 import ModalLogin from './ModalLogin'
 import { useAppSelector } from '../App/hooks'
+import { useNavigate } from 'react-router'
 
 const navigation = [
   { name: 'Mulule', href: '#', current: true },
@@ -19,6 +20,7 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
 
   let user = useAppSelector(state => state.auth.user);
+  
   return (
     <>
       <Disclosure as="nav" className="bg-gray-600/20 border-b border-red-400">
@@ -149,7 +151,8 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
+                              href="/account"
+                              target="_blank"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Mon Compte
