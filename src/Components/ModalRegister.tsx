@@ -41,8 +41,7 @@ export default function ModalLogin() {
 
             {showModal ? (
                 <>
-                    <div
-                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >
                         <div className="relative w-auto my-6 mx-auto max-w-3xl ">
                             {/*content*/}
@@ -55,7 +54,7 @@ export default function ModalLogin() {
                                 {/*header*/}
 
                                 {/*body*/}
-                                <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                                <div className="min-h-full flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
                                     <div className="max-w-md w-full space-y-8">
 
                                         <div>
@@ -114,7 +113,7 @@ export default function ModalLogin() {
                                                         />
                                                     </FloatingLabel>
                                                 </div>
-                                                {/*lasttname*/}
+                                                {/*lastname*/}
                                                 <div className="col-span-6 sm:col-span-3">
                                                     <FloatingLabel controlId="floatingInput"
                                                         label="Nom" className="mb-4 font-extralight">
@@ -124,6 +123,21 @@ export default function ModalLogin() {
                                                             aria-describedby="basic-addon1"
                                                             type="lastName"
                                                             name="lastName"
+                                                            required
+                                                            onChange={handleChange}
+                                                        />
+                                                    </FloatingLabel>
+                                                </div>
+                                                {/*birthdate*/}
+                                                <div className="col-span-6 sm:col-span-3">
+                                                    <FloatingLabel controlId="floatingInput"
+                                                        label="Date de naissance" className="mb-4 font-extralight">
+                                                        <FormControl
+                                                            placeholder="Date de naissance"
+                                                            aria-label="date de naissance"
+                                                            aria-describedby="basic-addon1"
+                                                            type="birthdate"
+                                                            name="birthdate"
                                                             required
                                                             onChange={handleChange}
                                                         />

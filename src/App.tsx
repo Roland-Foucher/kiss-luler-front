@@ -28,7 +28,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<OneProjectDetailPage />} />
-        <Route element ={ <ProtectedRoute><AccountPage /></ProtectedRoute>} path={"/account"} />
+        <Route element ={<AccountPage />} path={"/account"} />
       
       </Routes>
       <Footer />

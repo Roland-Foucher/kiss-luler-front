@@ -1,4 +1,5 @@
 import { useAppSelector } from "../App/hooks";
+import UploadAccount from "./UploadAccount";
 
 
 export default function AccountDetails() {
@@ -14,7 +15,9 @@ export default function AccountDetails() {
         <h2 className="ml-2 font-newFont text-xl ">Profil</h2>
       </header>
 
-      <div className="overflow-x-auto">
+      <UploadAccount/>
+
+      <div className="overflow-x-auto m-12">
         <h1>Bienvenue !</h1>
         <table className="min-w-full text-sm divide-y-2 divide-gray-200">
 
