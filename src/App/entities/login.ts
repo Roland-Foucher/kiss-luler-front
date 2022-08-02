@@ -15,6 +15,7 @@ export interface User {
   firstName?: string;
   lastName?: string;
   email?: string;
+  job?:string;
   password?: string;
   role?: Role;
 }
