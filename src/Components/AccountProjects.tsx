@@ -6,7 +6,6 @@ import OneCard from "./OneCard";
 export default function AccountProjects() {
 
   const {data, isError} = useGetUserProjectsQuery();
-
   return (
     <div>
     <header className="flex font-light">
