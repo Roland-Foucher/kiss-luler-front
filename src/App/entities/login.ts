@@ -1,5 +1,6 @@
 import { Role } from "./enum";
 
+
 export interface LoginDTO {
   username?: string;
   password?: string;
@@ -15,8 +16,11 @@ export interface User {
   firstName?: string;
   lastName?: string;
   email?: string;
-  job?:string;
+  job?: string;
   password?: string;
   role?: Role;
+  subscribeDate?: string;
+  birthdate?: Date;
+  photo?: string;
+  pseudo?: string;
 }
-

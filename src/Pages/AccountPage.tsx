@@ -11,10 +11,6 @@ import AccountProjects from "../Components/AccountProjects";
 
 
 
-
-
-
-
 export default function AccountPage(){
     return(
         <>

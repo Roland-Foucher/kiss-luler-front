@@ -23,8 +23,6 @@ export default function AccountDetails() {
         </div>
       </div>
 
-
-
       {/* card user */}
       <div className=" p-8">
         <div className="grid grid-cols-1 md:grid-cols-5 mx-auto">
@@ -35,24 +33,24 @@ export default function AccountDetails() {
               <div className="w-full text-left">
                 <div className="flex justify-center lg:pt-4 pt-8 pb-0">
                   <div className="p-3 text-left">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-slate-700">3,360</span>
-                    <span className="text-sm text-slate-400">projet suivi :{user}</span>
+                    <span className="text-m font-bold block uppercase tracking-wide text-slate-500">projet suivi</span>
+                    <span className="text-sm text-slate-400">{user?.email}</span>
                   </div>
                   <div className="p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-slate-700">2,454</span>
-                    <span className="text-sm text-slate-400">contribution : {user}</span>
+                    <span className="text-m font-bold block uppercase tracking-wide text-slate-500">contribution</span>
+                    <span className="text-sm text-slate-400"> {user?.job}</span>
                   </div>
 
                   <div className="p-3 text-center">
-                    <span className="text-xl font-bold block uppercase tracking-wide text-slate-700">564</span>
-                    <span className="text-sm text-slate-400">financement :{user}</span>
+                    <span className="text-m font-bold block uppercase tracking-wide text-slate-500">financement</span>
+                    <span className="text-sm text-slate-400">{user?.pseudo}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-2">
-              <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">prénom {user?.firstName} name {user?.lastName}</h3>
+              <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">{user?.firstName + "  "}{user?.lastName}</h3>
               <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
                 <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>job:{user?.job}
               </div>
@@ -67,44 +65,10 @@ export default function AccountDetails() {
             </div>
           </div>
           <div className="p-4 col-span-2">
-
           </div>
         </div>
       </div>
       {/* fin card user */}
-
-      <footer className="relative pt-6 pb-2 mt-6">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center md:justify-between justify-center">
-            <div className="w-full md:w-6/12 px-4 mx-auto text-center">
-              <div className="text-sm text-slate-500 font-semibold py-1">
-                Tailwind CSS Component from <a href="https://www.creative-tim.com/product/notus-design-system-pro?ref=tailwindcomponents" className="text-slate-700 hover:text-slate-500" target="_blank">Notus PRO Html</a> by <a href="https://www.creative-tim.com" className="text-slate-700 hover:text-slate-500" target="_blank"> Creative Tim</a>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
     </>
-
-
   )
-}
-
-{/* <div className="overflow-x-auto m-12">
-<h1>Bienvenue !</h1>
-<table className="min-w-full text-sm divide-y-2 divide-gray-200">
-
-  <tbody className="divide-y divide-gray-200">
-    <tr>
-      <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-        {user?.firstName}
-      </td>
-      <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{user?.lastName}</td>
-      <td className="px-4 py-2 text-gray-700 whitespace-nowrap">{user?.email}</td>
-
-    </tr>
-
-  </tbody>
-</table>
-</div> */}
+};
