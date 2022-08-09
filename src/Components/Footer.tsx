@@ -54,7 +54,7 @@ export default function Footer() {
                                         href="/"
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        className="text-teal-700 transition hover:text-teal-700/75"
+                                        className="text-blue-400 transition hover:text-blue-400/75"
                                     >
                                         <span className="sr-only">Facebook</span>
                                         <svg
@@ -77,7 +77,7 @@ export default function Footer() {
                                         href="/"
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        className="text-teal-700 transition hover:text-teal-700/75"
+                                        className="text-blue-400 transition hover:text-blue-400/75"
                                     >
                                         <span className="sr-only">Instagram</span>
                                         <svg
@@ -100,7 +100,7 @@ export default function Footer() {
                                         href="/"
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        className="text-teal-700 transition hover:text-teal-700/75"
+                                        className="text-blue-400 transition hover:text-blue-400/75"
                                     >
                                         <span className="sr-only">Twitter</span>
                                         <svg
@@ -121,7 +121,7 @@ export default function Footer() {
                                         href="/"
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        className="text-teal-700 transition hover:text-teal-700/75"
+                                        className="text-blue-400 transition hover:text-blue-400/75"
                                     >
                                         <span className="sr-only">GitHub</span>
                                         <svg
@@ -144,7 +144,7 @@ export default function Footer() {
                                         href="/"
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        className="text-teal-700 transition hover:text-teal-700/75"
+                                        className="text-blue-400 transition hover:text-blue-400/75"
                                     >
                                         <span className="sr-only">Dribbble</span>
                                         <svg
@@ -173,7 +173,7 @@ export default function Footer() {
                                 <span className="block sm:inline">All rights reserved.</span>
 
                                 <a
-                                    className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+                                    className="inline-block text-blue-400 underline transition hover:text-blue-400/75"
                                     href="/"
                                 >
                                     Terms & Conditions
@@ -182,7 +182,7 @@ export default function Footer() {
                                 <span>&middot;</span>
 
                                 <a
-                                    className="inline-block text-teal-600 underline transition hover:text-teal-600/75"
+                                    className="inline-block text-blue-400 underline transition hover:text-blue-400/75"
                                     href="/"
                                 >
                                     Privacy Policy
@@ -190,7 +190,7 @@ export default function Footer() {
                             </p>
 
                             <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">
-                                &copy; 2022 Company Name
+                                &copy; 2022 <strong className="text-orange-400">Mulule</strong> Corporate
                             </p>
                         </div>
                     </div>

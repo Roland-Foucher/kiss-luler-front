@@ -1,40 +1,42 @@
 import React, { useState } from "react";
-
-import { FloatingLabel, FormControl } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-
-import { useUserRegisterMutation } from "../App/API/authAPI";
-import { User } from "../App/entities/login";
+import { FloatingLabel, Form, FormControl } from "react-bootstrap";
+import { useAppDispatch } from "../App/hooks";
 
 
-export default function ModalRegister() {
+
+
+
+
+
+
+
+
+
+
+export default function ModalCreateProjectUser() {
 
     const [showModal, setShowModal] = React.useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const [postRegister, postQuery] = useUserRegisterMutation();
-    const [form, setForm] = useState<User>({} as User);
+    const [form, setForm] = useState()
 
     const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
         event.preventDefault();
-        const data = await postRegister(form).unwrap();
-        console.log(data);
+        // const data = await postRegister(form).unwrap();
+
     }
 
     const handleChange = (event: React.FormEvent<EventTarget>) => {
         let target = event.target as HTMLInputElement;
         let name = target.name;
         let value = target.value
-        let change = { ...form, [name]: value }
-        setForm(change)
+        // let change = { ...form, [name]: value }
+        // setForm(change)
     }
+
     return (
         <>
-
-
-            <button onClick={()=> setShowModal(true)} className="block w-full px-12 py-3 text-md font-medium bg-white rounded shadow text-rose-gray-300 sm:w-auto hover:text-orange-500 active:text-rose-500 focus:outline-none focus:ring" >
-                Créer un compte
-            </button>
+            <button onClick={() => setShowModal(true)} className=" ml-4 w-20 rounded-md  p-2 text-sm text-grey-600 shadow-md hover:text-white  hover:bg-gray-600 hover:duration-500 bg-gray-200 p-2">Créer</button>
 
             {showModal ? (
                 <>
@@ -42,7 +44,7 @@ export default function ModalRegister() {
                     >
                         <div className=" w-auto mx-auto max-w-3xl ">
                             {/*content*/}
-                            <div className=" bg-neutral-100/80 border-x border-orangeBull  shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
+                            <div className="  bg-gradient-to-r from-yellowBull/20 to-redBull/60 border-x border-orangeBull  shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                                 <div className="flex justify-end p-2">
                                     <button onClick={() => setShowModal(false)} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="authentication-modal">
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -104,88 +106,104 @@ export default function ModalRegister() {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <p className="mt-12 ml-8 bg-transparent text-orange-400 text-lg font-bold">CréMule toi</p>
+                                            <p className="mt-12 ml-8 bg-transparent  text-gray-600 text-base font-medium">Nouveau Projet</p>
                                         </div>
 
 
                                         <form className="mt-8 space-y-4" action="#" method="POST" onSubmit={handleSubmit}>
-                                            <input type="hidden" name="remember" defaultValue="true" />
+
                                             <div className="grid grid-cols-6 gap-6">
 
-
-
-                                                {/*Email*/}
+                                                {/*Title*/}
                                                 <div className="col-span-6 sm:col-span-3">
-                                                    <FloatingLabel controlId="floatingInput" label="Email*" className="mb-4 font-extralight">
+                                                    <FloatingLabel controlId="floatingInput" label="Titre" className="mb-4 font-extralight" >
                                                         <FormControl
-                                                            placeholder="Email"
-                                                            aria-label="Email"
+                                                            placeholder="Titre"
+                                                            aria-label="Title"
                                                             aria-describedby="basic-addon1"
-                                                            type="email"
-                                                            name="email"
+                                                            type="text"
+                                                            name="title"
                                                             required
                                                             onChange={handleChange}
                                                         />
                                                     </FloatingLabel>
                                                 </div>
-                                                {/*Mot de passe*/}
+
+                                                {/*ConsiderationsAmount*/}
+                                                <div className="col-span-6 sm:col-span-3">
+                                                    <FloatingLabel controlId="floatingInput"
+                                                        label="Montant total demandé" className="mb-4 font-extralight">
+                                                        <FormControl
+                                                            placeholder="Montant total demandé"
+                                                            aria-describedby="basic-addon1"
+                                                            type="number"
+                                                            name="considerationsAmount"
+                                                            required
+                                                            onChange={handleChange}
+                                                            min="0"
+                                                        />
+                                                    </FloatingLabel>
+                                                </div>
 
 
-                                                <div className="col-span-6 sm:col-span-3">
+
+
+                                                {/*date init*/}
+                                                <div className="col-span-3 sm:col-span-3">
                                                     <FloatingLabel controlId="floatingInput"
-                                                        label="Mot de passe*" className="mb-4 font-extralight">
+                                                        label="Date de départ" className="mb-4 font-extralight">
                                                         <FormControl
-                                                            placeholder="Mot de passe"
-                                                            aria-label="Mot de passe"
-                                                            aria-describedby="basic-addon1"
-                                                            type="password"
-                                                            name="password"
-                                                            required
-                                                            onChange={handleChange}
-                                                        />
-                                                    </FloatingLabel>
-                                                </div>
-                                                {/*firstname*/}
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <FloatingLabel controlId="floatingInput"
-                                                        label="Prénom" className="mb-4 font-extralight">
-                                                        <FormControl
-                                                            placeholder="prénom"
-                                                            aria-label="prénom"
-                                                            aria-describedby="basic-addon1"
-                                                            type="firstName"
-                                                            name="firstName"
-                                                            required
-                                                            onChange={handleChange}
-                                                        />
-                                                    </FloatingLabel>
-                                                </div>
-                                                {/*lastname*/}
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <FloatingLabel controlId="floatingInput"
-                                                        label="Nom" className="mb-4 font-extralight">
-                                                        <FormControl
-                                                            placeholder="Nom"
-                                                            aria-label="nom"
-                                                            aria-describedby="basic-addon1"
-                                                            type="lastName"
-                                                            name="lastName"
-                                                            required
-                                                            onChange={handleChange}
-                                                        />
-                                                    </FloatingLabel>
-                                                </div>
-                                                {/*birthdate*/}
-                                                <div className="col-span-6 sm:col-span-3">
-                                                    <FloatingLabel controlId="floatingInput"
-                                                        label="Date de naissance" className="mb-4 font-extralight">
-                                                        <FormControl
-                                                            placeholder="Date de naissance"
+                                                            placeholder="Date de départ"
                                                             aria-label="date de naissance"
                                                             aria-describedby="basic-addon1"
                                                             type="date"
-                                                            name="birthdate"
+                                                            name="dateInit"
+
+                                                            onChange={handleChange}
+                                                        />
+                                                    </FloatingLabel>
+                                                </div>
+
+                                                {/*date end*/}
+                                                <div className="col-span-3 sm:col-span-3">
+                                                    <FloatingLabel controlId="floatingInput"
+                                                        label="Date de fin" className="mb-4 font-extralight">
+                                                        <FormControl
+                                                            placeholder="Date de fin"
+                                                            aria-label="date de fin"
+                                                            aria-describedby="basic-addon1"
+                                                            type="date"
+                                                            name="dateEnd"
                                                             required
+                                                            onChange={handleChange}
+                                                        />
+                                                    </FloatingLabel>
+                                                </div>
+
+
+                                                {/*Category*/}
+                                                <div className="col-span-6 ">
+                                                    <Form.Select name="category" size="lg" className="font-extralight " required>
+                                                        <option>Categorie</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </Form.Select>
+                                                </div>
+
+
+                                                {/*description*/}
+                                                <div className="col-span-6 ">
+                                                    <FloatingLabel controlId="floatingInput"
+                                                        label="Description" className="mb-4 font-extralight">
+                                                        <FormControl
+                                                            placeholder="Description"
+                                                            aria-label="nom"
+                                                            aria-describedby="basic-addon1"
+                                                            as="textarea"
+                                                            name="description"
+                                                            required
+                                                            style={{ height: '100px' }}
                                                             onChange={handleChange}
                                                         />
                                                     </FloatingLabel>
@@ -195,13 +213,13 @@ export default function ModalRegister() {
                                             <div>
                                                 <button
                                                     type="submit"
-                                                    className="group relative w-full flex justify-center py-2 px-4   font-light text-md text-white   rounded-md bg-gray-600/60  opacity-90 hover:opacity-100 hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
+                                                    className="group relative w-full flex justify-center py-2 px-4   font-light text-md text-white   rounded-md bg-gray-600  opacity-90 hover:opacity-100 hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
                                                 >
-                                                    Me créer un compte
+                                                    Créer
                                                 </button>
+                                                {/* 
+                                                {postQuery.isError && <p>{(postQuery.error as any).data.error}</p> */}
 
-                                                {postQuery.isError && <p>{(postQuery.error as any).data.error}</p>
-                                                }
                                             </div>
                                         </form>
                                     </div>
@@ -214,5 +232,6 @@ export default function ModalRegister() {
             ) : null
             }
         </>
-    );
+
+    )
 }

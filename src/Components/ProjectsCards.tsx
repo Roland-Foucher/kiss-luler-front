@@ -7,10 +7,9 @@ import OneCard from "./OneCard";
 export default function ProjectsCards() {
 
   const { data, isError } = useGetAllProjectsQuery()
-  console.log(data);
 
 
-  let inWaitProjects = ["je suis un projet", "je suis un deuxieme projet", "je suis un troisieme projet", "je suis un quatrième projet", "je suis un cinquième projet"]
+
 
   return (
     <>
@@ -22,13 +21,10 @@ export default function ProjectsCards() {
         <h2 className="ml-2 font-newFont text-xl ">Projets</h2>
       </header>
       <section>
-        <article className="grid grid-cols-3 gap-4 mt-5">
+        <article className="lg:grid lg:grid-cols-3 lg:gap-4 flex-wrap md:grid md:grid-cols-2  md:gap-3  mt-5">
           {data && data!.map((items: Project) =>
             <div key={items.id}>
-              <OneCard
-                project={items}
-                isUserProject={false}
-              />
+              <OneCard project={items} isUserProject={false} />
             </div>
           )}
         </article>

@@ -3,24 +3,16 @@ import React from 'react'
 export default function UploadAccount() {
 
     return (
-        <div className="static text-white bg-gray-900">
+        <div className="static brightness-50 hover:brightness-100 hover:duration-700  text-white bg-[url('/public/img/headphone.jpg')]  bg-cover  bg-center  bg-no-repeat">
             <div className="max-w-screen-xl px-2 py-10 mx-auto lg:items-center lg:flex">
                 <div className="max-w-3xl mx-auto text-center">
                     <span className="sm:block">
-                        <label className="inline-block mb-2 text-gray-500">File Upload</label>
-                        <div className="flex items-center justify-center w-full">
+                        <label className="inline-block mb-2 text-gray-500"></label>
+                        <div className="flex items-center justify-center w-full ">
                             <label
-                                className="flex flex-col w-full h-32 hover:bg-gray-100 hover:border-gray-300">
-                                <div className="flex flex-col items-center justify-center pt-7">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                    </svg>
-                                    <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                        Changer votre photo de bannière</p>
-                                </div>
-                                <input type="file" className="opacity-0" />
+                                className="flex flex-col w-full h-60 hover:bg-gray-100 hover:border-gray-300">
+                                
+                            
                             </label>
                         </div>
                     </span>

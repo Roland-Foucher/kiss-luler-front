@@ -16,11 +16,8 @@ export const authApi = createApi({
             providesTags: ['User']
         }),
 
-        // getUserById: builder.query<User, number>({
-        //     query: (id)=> ({
-        //         url: '/' +id
-        //     })
-        // }),
+
+    
         userLogin: builder.mutation<AuthState, LoginDTO>({
             query:(body)=>({
                 url: '/login',
@@ -39,9 +36,10 @@ export const authApi = createApi({
             invalidatesTags:['User']
         }),
         getOneUserProject: builder.query<Project, number>({
-          query:(id)=> '/account/project/'+ id,
-          providesTags: ['Project']
-      }),
+            query:(id)=> '/account/project/'+ id,
+            providesTags: ['Project']
+        }),
+  
     })
 })
 

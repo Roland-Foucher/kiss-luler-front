@@ -2,13 +2,15 @@ import { Considerations } from "./considerations";
 
 export interface Project {
 
-    id?: string;
+    id?: number;
     title?: string;
     userName?: string;
     photo?: string;
     category?: string;
-    considerations_amount?: number,
+    considerationsAmount?: number,
     date?: string;
     consideration?: Considerations[];
+    amountInit?: number,
+    description?: string,
 
 }
