@@ -9,6 +9,7 @@ import { RegisterPage } from './Pages/RegisterPage';
 import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 import AccountPage from './Pages/AccountPage';
 import ProtectedRoute from './App/ProtectedRoute';
+import OneProjectUserDetailPage from './Pages/OneProjectUserDetailPage';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<OneProjectDetailPage />} />
+        <Route path="/user/project/:id" element ={<OneProjectUserDetailPage /> } />
         <Route element ={<AccountPage />} path={"/account"} />
       
       </Routes>

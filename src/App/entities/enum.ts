@@ -3,3 +3,9 @@ export enum Role{
   USER = "Utilisateur",
   BLACKLISTED = "Black-listé"
 }
+
+export enum ConsiderationStatus {
+  INPROGRESS,
+  READY,
+  CLOSED
+}

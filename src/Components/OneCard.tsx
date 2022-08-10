@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { Project } from "../App/entities/project";
+import { useAppSelector } from "../App/hooks";
 
 interface Props {
   project: Project
@@ -7,6 +8,7 @@ interface Props {
 
 export default function OneCard({project} : Props) {
   
+  const user = useAppSelector(state => state.auth.user);
   const navigate = useNavigate()
   return (
     <div>
@@ -85,7 +87,7 @@ export default function OneCard({project} : Props) {
               </div>
             </div>
           </dl>
-          <button onClick={() => navigate(`/project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+          <button onClick={() => user ? navigate(`/user/project/${project.id}`) : navigate(`/project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
             Voir
           </button>
         </div>

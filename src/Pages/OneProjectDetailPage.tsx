@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { RouterParams } from "../App";
 import { useGetOneProjectQuery } from "../App/API/projects";
 import { Considerations } from "../App/entities/considerations";
+import { ConsiderationStatus } from "../App/entities/enum";
 
 
 
@@ -16,6 +17,16 @@ export default function OneProjectDetailPage() {
 
 
     const { data } = useGetOneProjectQuery(Number(id))
+
+    const classNameStatus = (status?: ConsiderationStatus) : string | undefined => {
+      console.log(status);
+      switch (status?.toString()) {   
+        case "READY":
+          return "text-success";
+        case "CLOSED":
+          return "text-danger";
+      }
+    }
 
     return (
         <>
@@ -50,6 +61,7 @@ export default function OneProjectDetailPage() {
 
                                         <div className="p-3 sm:col-span-2">
                                             <h2>Contribution</h2>
+                                            <h2 className = {classNameStatus(item.status)}>{item.status}</h2>
                                             <ul className="mt-8" >
                                                 <li
                                                     className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
@@ -76,6 +88,7 @@ export default function OneProjectDetailPage() {
                                             <p className="mt-2 text-sm text-gray-500">
 
                                             </p>
+
                                         </div>
                                     </div>
 

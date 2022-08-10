@@ -16,13 +16,10 @@ export const authApi = createApi({
             providesTags: ['User']
         }),
 
-
-        // getAllUsers: builder.query<Project[], void>({
-        //     query:()=>({
-        //         url: '/account/projects',
-        //         method: 'GET'
-        //     })
-        // }),
+        getOneUserProject: builder.query<Project, number>({
+          query:(id)=> '/account/project/'+ id,
+          providesTags: ['User']
+      }),
         // getUserById: builder.query<User, number>({
         //     query: (id)=> ({
         //         url: '/' +id
@@ -48,4 +45,4 @@ export const authApi = createApi({
     })
 })
 
-export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation} = authApi
+export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
