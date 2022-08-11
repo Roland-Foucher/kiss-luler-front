@@ -162,18 +162,7 @@ export default function ModalRegister() {
                                                 </div>
                                                 {/*lastname*/}
                                                 <div className="col-span-6 sm:col-span-3">
-                                                    <FloatingLabel controlId="floatingInput"
-                                                        label="Nom" className="mb-4 font-extralight">
-                                                        <FormControl
-                                                            placeholder="Nom"
-                                                            aria-label="nom"
-                                                            aria-describedby="basic-addon1"
-                                                            type="lastName"
-                                                            name="lastName"
-                                                            required
-                                                            onChange={handleChange}
-                                                        />
-                                                    </FloatingLabel>
+
                                                 </div>
                                                 {/*birthdate*/}
                                                 <div className="col-span-6 sm:col-span-3">

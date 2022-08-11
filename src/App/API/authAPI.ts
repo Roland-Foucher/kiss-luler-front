@@ -3,6 +3,7 @@ import { AuthState } from './auth-slice';
 import { LoginDTO, User } from '../entities/login';
 import { prepare } from '../utils/token';
 import { Project } from '../entities/project';
+import { UpdatePasswordUSerDTO, UpdateUserDTO } from '../entities/updateUser';
 
 
 export const authApi = createApi({
@@ -16,6 +17,20 @@ export const authApi = createApi({
             providesTags: ['User']
         }),
 
+        updateUserProfile: builder.mutation<User, UpdateUserDTO>({
+            query: (body)=>({
+                url:'/account/update',
+                method: 'PATCH',
+                body
+            })
+        }),
+        updatePasswordUser: builder.mutation<void, UpdatePasswordUSerDTO>({
+            query: (body)=>({
+                url:'/account/password',
+                method: 'PATCH',
+                body
+            })
+        }),
 
     
         userLogin: builder.mutation<AuthState, LoginDTO>({
@@ -43,4 +58,4 @@ export const authApi = createApi({
     })
 })
 
-export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
+export const {useGetUserProjectsQuery, useUpdatePasswordUserMutation , useUpdateUserProfileMutation ,useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
