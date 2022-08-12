@@ -1,9 +1,9 @@
-import { stat } from "fs";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { RouterParams } from "../App";
-import { useGetOneUserProjectQuery } from "../App/API/authAPI";
-import { useAddConsiderationMutation, useEditConsiderationMutation } from "../App/API/userConsiderations";
+import { authApi, useGetOneUserProjectQuery } from "../App/API/authAPI"
+import { useAddConsiderationMutation, useDeleteConsiderationMutation, useEditConsiderationMutation, useTakeContributionClosedMutation, useTakeContributionReadyMutation } from "../App/API/userConsiderations";
 import { Considerations } from "../App/entities/considerations";
 import { ConsiderationStatus } from "../App/entities/enum";
 import ModalAddContribution from "../Components/ModalAddEditContribution";
@@ -27,6 +27,13 @@ export default function OneProjectUserDetailPage() {
 
   const { data } = useGetOneUserProjectQuery(Number(id))
 
+  const dispatch = useDispatch();
+
+  const [deleteContribution] = useDeleteConsiderationMutation();
+
+  const [conditionReady] = useTakeContributionReadyMutation();
+  const [conditionClosed] = useTakeContributionClosedMutation();
+
   const classNameStatus = (status?: ConsiderationStatus): string | undefined => {
     switch (status?.toString()) {
       case "INPROGRESS":
@@ -44,6 +51,30 @@ export default function OneProjectUserDetailPage() {
     setEditConsideration(consideration);
     setShowModalEditContribution(true);
   }
+
+
+  const onDeleteHandler = (item: Considerations) => {
+    if (window.confirm(`Supprimer la considération ${item.title} ?`)) {
+      deleteContribution(item.id!).unwrap();
+      dispatch(authApi.util.invalidateTags(["Project"]));
+    }
+  };
+
+  const takeConditionReady = (item: Considerations) => {
+    if (window.confirm(`passer la considération ${item.title} READY?`)) {
+      conditionReady(item.id!).unwrap();
+      dispatch(authApi.util.invalidateTags(["Project"]));
+    }
+  };
+
+  const takeConditionClosed = (item: Considerations) => {
+    if (window.confirm(`passer la considération ${item.title} CLOSED?`)) {
+      conditionClosed(item.id!).unwrap();
+      dispatch(authApi.util.invalidateTags(["Project"]));
+    }
+  };
+
+
 
   return (
     <>
@@ -71,7 +102,7 @@ export default function OneProjectUserDetailPage() {
                     <div className="relative">
                       <img
                         className="absolute inset-0 object-cover m-auto"
-                        src={item.photo ? process.env.REACT_APP_SERVER_URL + item.photo : "https://cdn.pixabay.com/photo/2014/10/20/21/17/cd-495733_960_720.jpg"}
+                        src={item.photo ? item.photo : "https://cdn.pixabay.com/photo/2014/10/20/21/17/cd-495733_960_720.jpg"}
                         alt="contribution"
                       />
                     </div>
@@ -105,14 +136,16 @@ export default function OneProjectUserDetailPage() {
                               className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
                             >
                               <button className="btn btn-primary pt-1 m-1"
-
                                 onClick={() => editModal(item)}>
                                 EDITER
                               </button>
-                              <button className="btn btn-success pt-1 m-1">
+                              <button className="btn btn-success pt-1 m-1"
+                                onClick={() => takeConditionReady(item)}>
                                 READY 👌
                               </button>
-                              <button className="btn btn-danger pt-1 m-1">
+                              <button
+                                onClick={() => onDeleteHandler(item)}
+                                className="btn btn-danger pt-1 m-1">
                                 SUPPRIMER
                               </button>
                             </li>
@@ -122,8 +155,9 @@ export default function OneProjectUserDetailPage() {
                             <li
                               className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
                             >
-                              <button className="btn btn-danger pt-1 m-1">
-                                SUPPRIMER
+                              <button className="btn btn-danger pt-1 m-1"
+                                onClick={() => takeConditionClosed(item)}>
+                                FERMER
                               </button>
                             </li>
                           </>}
@@ -132,7 +166,8 @@ export default function OneProjectUserDetailPage() {
                             <li
                               className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
                             >
-                              <button className="btn btn-danger pt-1 m-1">
+                              <button className="btn btn-danger pt-1 m-1"
+                                onClick={() => takeConditionReady(item)}>
                                 RE-OPEN
                               </button>
                             </li>

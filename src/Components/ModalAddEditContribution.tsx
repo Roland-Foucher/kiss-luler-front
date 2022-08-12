@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FloatingLabel, FormControl } from "react-bootstrap";
-import { json } from "stream/consumers";
+import { useDispatch } from "react-redux";
+import { authApi } from "../App/API/authAPI";
 import { Considerations } from "../App/entities/considerations";
 
 interface Props {
@@ -19,7 +20,8 @@ export default function ModalAddEditContribution({ projectId, setShowModal, quer
   const [postConsideration, postQuery] = queryType();
 
   const [form, setForm] = useState<Considerations>(consideration as Considerations);
-  const [imageFile, setImageFile] = useState({} as File);
+  const [imageFile, setImageFile] = useState({} as File | null);
+  const dispatch = useDispatch();
 
 
   const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
@@ -28,16 +30,17 @@ export default function ModalAddEditContribution({ projectId, setShowModal, quer
     form.id = consideration?.id;
     form.projectId = projectId;
     const formData = new FormData();
-    formData.append("file", imageFile, imageFile.name)
+    if (imageFile) {
+      formData.append("file", imageFile, imageFile.name)
+    }
     formData.append("considerationDto", new Blob([JSON.stringify(form)], {
       type: "application/json"
     }));
-    console.log(formData.get("considerationDto"))
 
     try {
       await postConsideration(formData).unwrap();
-      setShowModal(false)
-      window.location.reload();
+      dispatch(authApi.util.invalidateTags(["Project"]));
+      setShowModal(false);
     } catch (e) {
       console.error(e);
     }
@@ -51,10 +54,15 @@ export default function ModalAddEditContribution({ projectId, setShowModal, quer
 
     if (target.files != null) {
       setImageFile(target.files[0])
+    } else {
+      setImageFile(null);
     }
+
     let change = { ...form, [name]: value }
     setForm(change)
   }
+
+
 
   return (
     <>
