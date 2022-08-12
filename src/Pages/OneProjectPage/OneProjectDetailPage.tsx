@@ -15,7 +15,6 @@ export default function OneProjectDetailPage() {
 
   const { id } = useParams<RouterParams>();
 
-
   const { data } = useGetOneProjectQuery(Number(id))
 
   return (
@@ -39,7 +38,7 @@ export default function OneProjectDetailPage() {
                 {data?.consideration?.map((item: Considerations) =>
 
                   <ContributionComponent
-                    isUser={false}
+                    isUser={false} // les considérations ne sont pas éditablent
                     item={item}
                     setEditConsideration={null}
                     setShowModalEditContribution={null}

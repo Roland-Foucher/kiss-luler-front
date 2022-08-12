@@ -17,12 +17,14 @@ import ModalAddContribution from "../../Components/OneProjectComponents/ModalAdd
 export default function OneProjectUserDetailPage() {
 
   const { id } = useParams<RouterParams>();
+  const { data } = useGetOneUserProjectQuery(Number(id))
 
+  // géstions des modal add et edit
   const [showModalAddContribution, setShowModalAddContribution] = useState(false);
   const [showModalEditContribution, setShowModalEditContribution] = useState(false);
-  const [editConsideration, setEditConsideration] = useState({} as Considerations)
 
-  const { data } = useGetOneUserProjectQuery(Number(id))
+  // préremplie le formulaire pour éditer la considération
+  const [editConsideration, setEditConsideration] = useState({} as Considerations)
 
   return (
     <>
@@ -46,7 +48,7 @@ export default function OneProjectUserDetailPage() {
                 {data?.consideration?.map((item: Considerations) =>
 
                   <ContributionComponent
-                    isUser={true}
+                    isUser={true} // le user peut éditer ses considérations
                     item={item}
                     setEditConsideration={setEditConsideration}
                     setShowModalEditContribution={setShowModalEditContribution}

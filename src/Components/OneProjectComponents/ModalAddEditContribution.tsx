@@ -12,9 +12,6 @@ interface Props {
   labelButton: string
 }
 
-
-
-
 export default function ModalAddEditContribution({ projectId, setShowModal, queryType, consideration, labelButton }: Props) {
 
   const [postConsideration, postQuery] = queryType();
@@ -29,17 +26,23 @@ export default function ModalAddEditContribution({ projectId, setShowModal, quer
     event.preventDefault();
     form.id = consideration?.id;
     form.projectId = projectId;
+
     const formData = new FormData();
+
+    // si pas de fichier on requête la route sans fichier
     if (imageFile) {
       formData.append("file", imageFile, imageFile.name)
     }
+
+    // ajout de l'entité dans un blob
     formData.append("considerationDto", new Blob([JSON.stringify(form)], {
       type: "application/json"
     }));
 
     try {
       await postConsideration(formData).unwrap();
-      dispatch(authApi.util.invalidateTags(["Project"]));
+
+      dispatch(authApi.util.invalidateTags(["Project"]));  // refresh le projet
       setShowModal(false);
     } catch (e) {
       console.error(e);
@@ -55,7 +58,7 @@ export default function ModalAddEditContribution({ projectId, setShowModal, quer
     if (target.files != null) {
       setImageFile(target.files[0])
     } else {
-      setImageFile(null);
+      setImageFile(null); // passe le file null si pas dans le formulaire
     }
 
     let change = { ...form, [name]: value }

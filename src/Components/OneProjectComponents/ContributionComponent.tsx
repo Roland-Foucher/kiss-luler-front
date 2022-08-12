@@ -14,13 +14,14 @@ interface Props {
 
 export default function ContributionComponent({ item, isUser, setShowModalEditContribution, setEditConsideration }: Props) {
 
-
+  // dispath pour les invalidateTags
   const dispatch = useDispatch();
 
   const [deleteContribution] = useDeleteConsiderationMutation();
   const [conditionReady] = useTakeContributionReadyMutation();
   const [conditionClosed] = useTakeContributionClosedMutation();
 
+  // géstion de l'affichage en fonction du status des considérations
   const classNameStatus = (status?: ConsiderationStatus): string | undefined => {
     switch (status?.toString()) {
       case "INPROGRESS":
@@ -99,6 +100,7 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
             {item.title}
           </li>
 
+          {/* Visible seulement par l'utilisateur propriétaire  */}
           {isUser && item.status?.toString() === "INPROGRESS" &&
             <>
               <li
@@ -119,6 +121,8 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
                 </button>
               </li>
             </>}
+
+          {/* Visible seulement par l'utilisateur propriétaire  */}
           {isUser && item.status?.toString() === "READY" &&
             <>
               <li
@@ -130,6 +134,8 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
                 </button>
               </li>
             </>}
+
+          {/* Visible seulement par l'utilisateur propriétaire  */}
           {isUser && item.status?.toString() === "CLOSED" &&
             <>
               <li
@@ -141,6 +147,7 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
                 </button>
               </li>
             </>}
+
 
         </ul>
 
