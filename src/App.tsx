@@ -6,14 +6,14 @@ import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
 import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
-import OneProjectDetailPage from './Pages/OneProjectDetailPage';
+import OneProjectDetailPage from './Pages/OneProjectPage/OneProjectDetailPage';
 import AccountPage from './Pages/AccountPage';
 import ProtectedRoute from './App/ProtectedRoute';
-import OneProjectUserDetailPage from './Pages/OneProjectUserDetailPage';
+import OneProjectUserDetailPage from './Pages/OneProjectPage/OneProjectUserDetailPage';
 
 
 
-export type RouterParams  = {
+export type RouterParams = {
   id: string
 }
 
@@ -29,9 +29,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:id" element={<OneProjectDetailPage />} />
-        <Route path="/user/project/:id" element ={<OneProjectUserDetailPage /> } />
-        <Route element ={<AccountPage />} path={"/account"} />
-      
+        <Route path="/user/project/:id" element={<OneProjectUserDetailPage />} />
+        <Route element={<AccountPage />} path={"/account"} />
+
       </Routes>
       <Footer />
     </BrowserRouter>

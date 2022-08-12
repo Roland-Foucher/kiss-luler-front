@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FloatingLabel, FormControl } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { authApi } from "../App/API/authAPI";
-import { Considerations } from "../App/entities/considerations";
+import { authApi } from "../../App/API/authAPI";
+import { Considerations } from "../../App/entities/considerations";
 
 interface Props {
   setShowModal: Function
