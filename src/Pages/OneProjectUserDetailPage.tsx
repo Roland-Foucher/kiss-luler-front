@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import { RouterParams } from "../App";
 import { useGetOneUserProjectQuery } from "../App/API/authAPI";
+import { useAddConsiderationMutation, useEditConsiderationMutation } from "../App/API/userConsiderations";
 import { Considerations } from "../App/entities/considerations";
 import { ConsiderationStatus } from "../App/entities/enum";
-import ModalAddContribution from "../Components/ModalAddContribution";
+import ModalAddContribution from "../Components/ModalAddEditContribution";
 
 
 
@@ -20,6 +21,8 @@ export default function OneProjectUserDetailPage() {
   const { id } = useParams<RouterParams>();
 
   const [showModalAddContribution, setShowModalAddContribution] = useState(false);
+  const [showModalEditContribution, setShowModalEditContribution] = useState(false);
+  const [editConsideration, setEditConsideration] = useState({} as Considerations)
 
 
   const { data } = useGetOneUserProjectQuery(Number(id))
@@ -33,6 +36,13 @@ export default function OneProjectUserDetailPage() {
       case "CLOSED":
         return "text-danger";
     }
+  }
+
+
+  const editModal = (consideration: Considerations) => {
+
+    setEditConsideration(consideration);
+    setShowModalEditContribution(true);
   }
 
   return (
@@ -60,9 +70,9 @@ export default function OneProjectUserDetailPage() {
                   >
                     <div className="relative">
                       <img
-                        className="absolute inset-0 object-cover w-full h-full"
-                        src="https://cdn.pixabay.com/photo/2014/10/20/21/17/cd-495733_960_720.jpg"
-                        alt=""
+                        className="absolute inset-0 object-cover m-auto"
+                        src={item.photo ? process.env.REACT_APP_SERVER_URL + item.photo : "https://cdn.pixabay.com/photo/2014/10/20/21/17/cd-495733_960_720.jpg"}
+                        alt="contribution"
                       />
                     </div>
 
@@ -90,12 +100,43 @@ export default function OneProjectUserDetailPage() {
                         </li>
 
                         {item.status?.toString() === "INPROGRESS" &&
-                          <li
-                          className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
-                          >
-                            <button className="btn btn-primary" >
-                              edit
-                            </button></li>}
+                          <>
+                            <li
+                              className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
+                            >
+                              <button className="btn btn-primary pt-1 m-1"
+
+                                onClick={() => editModal(item)}>
+                                EDITER
+                              </button>
+                              <button className="btn btn-success pt-1 m-1">
+                                READY 👌
+                              </button>
+                              <button className="btn btn-danger pt-1 m-1">
+                                SUPPRIMER
+                              </button>
+                            </li>
+                          </>}
+                        {item.status?.toString() === "READY" &&
+                          <>
+                            <li
+                              className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
+                            >
+                              <button className="btn btn-danger pt-1 m-1">
+                                SUPPRIMER
+                              </button>
+                            </li>
+                          </>}
+                        {item.status?.toString() === "CLOSED" &&
+                          <>
+                            <li
+                              className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
+                            >
+                              <button className="btn btn-danger pt-1 m-1">
+                                RE-OPEN
+                              </button>
+                            </li>
+                          </>}
 
                       </ul>
 
@@ -182,7 +223,7 @@ export default function OneProjectUserDetailPage() {
 
                     <button
                       type="button"
-                      onClick = {() => setShowModalAddContribution(true)}
+                      onClick={() => setShowModalAddContribution(true)}
                       className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-redBull rounded hover:bg-redBull/60"
                     >
                       Ajouter une contribution
@@ -195,15 +236,27 @@ export default function OneProjectUserDetailPage() {
         </section>
 
       </section>
-      {showModalAddContribution &&  
-      <ModalAddContribution 
-        setShowModal = {setShowModalAddContribution}
-        projectId = {Number(id)}
-        
-        />}
-
-
-
+      {/* Affichage du formulaire de création de contributions */}
+      {
+        showModalAddContribution &&
+        <ModalAddContribution
+          queryType={useAddConsiderationMutation}
+          setShowModal={setShowModalAddContribution}
+          projectId={Number(id)}
+          consideration={{}}
+          labelButton="Ajouter la contribution"
+        />
+      }
+      {/* Affichage du formulaire d'édition de contributions */}
+      {
+        showModalEditContribution && <ModalAddContribution
+          queryType={useEditConsiderationMutation}
+          setShowModal={setShowModalEditContribution}
+          projectId={Number(id)}
+          consideration={editConsideration}
+          labelButton="Modifier la contribution"
+        />
+      }
 
     </>
   )

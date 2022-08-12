@@ -1,7 +1,7 @@
 import { ConsiderationStatus } from "./enum";
 
 export interface Considerations {
-    considerationId?: number,
+    id?: number,
     considAmount?: number,
     title?: string,
     description?: string,
