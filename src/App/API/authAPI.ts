@@ -7,7 +7,7 @@ import { Project } from '../entities/project';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    tagTypes: ['Post','User'], 
+    tagTypes: ['Post','User', 'Project'], 
     baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_SERVER_URL +'/api/user', prepareHeaders: prepare}),
     endpoints: (builder) => ({
 
@@ -16,13 +16,6 @@ export const authApi = createApi({
             providesTags: ['User']
         }),
 
-
-        // getAllUsers: builder.query<Project[], void>({
-        //     query:()=>({
-        //         url: '/account/projects',
-        //         method: 'GET'
-        //     })
-        // }),
         // getUserById: builder.query<User, number>({
         //     query: (id)=> ({
         //         url: '/' +id
@@ -44,8 +37,12 @@ export const authApi = createApi({
                 body
             }),
             invalidatesTags:['User']
-        })
+        }),
+        getOneUserProject: builder.query<Project, number>({
+          query:(id)=> '/account/project/'+ id,
+          providesTags: ['Project']
+      }),
     })
 })
 
-export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation} = authApi
+export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi

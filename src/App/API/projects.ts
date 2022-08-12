@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Project } from "../entities/project";
-import { prepare } from "../utils/token";
 
 
 
