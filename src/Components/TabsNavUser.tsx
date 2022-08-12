@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { Outlet } from 'react-router';
-import { Link } from 'react-router-dom';
 import PasswordUpdate from './PasswordUpdate';
 import UpdateProfile from './UpdateProfil';
 
@@ -9,9 +6,32 @@ import UpdateProfile from './UpdateProfil';
 export default function TabsNavUser() {
 
     return (
-        <>
+        <div>
+            <Tabs
+                defaultActiveKey=""
+                transition={true}
+                id="justify-tab-example"
+                className="mb-3"
+                justify
+            >
+                <Tab eventKey="" title="Mon Mumulcompte">
+                    <UpdateProfile />
+                </Tab>
+                <Tab eventKey="password" title="Mon mumule passe ">
+                    <PasswordUpdate />
+                </Tab>
+                <Tab eventKey="Si on a des idées" title="?" >
+                </Tab>
+            </Tabs>
+        </div>
 
-            {/* <div >
+    )
+}
+
+{
+    /* 
+    Exemple de tabs nav sans react bootstap :
+    <div >
                 <ul className="flex border-b">
                     <li className="-mb-px mr-1">
                         <Link to="" className="bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-600 hover:text-gray-800 font-semibold" >
@@ -29,24 +49,4 @@ export default function TabsNavUser() {
                 </ul>
             </div> */}
 
-            <Tabs
-                defaultActiveKey=""
-                transition={false}
-                id="noanim-tab-example"
-                className="mb-3"
-            >
-                <Tab eventKey="" title="Mon Mumulcompte">
-                    <UpdateProfile />
-                </Tab>
-                <Tab eventKey="password" title="Mon mumule passe ">
-                    <PasswordUpdate />
-                </Tab>
-                <Tab eventKey="contact" title="Contact" >
-
-                </Tab>
-            </Tabs>
-
-            {/* <Outlet /> */}
-        </>
-    )
-}
+{/* <Outlet /> */ }

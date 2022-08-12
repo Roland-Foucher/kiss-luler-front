@@ -7,7 +7,7 @@ import { User } from '../App/entities/login';
 
 export default function UpdateProfile() {
     const [postUpdate, postQuery] = useUpdateUserProfileMutation();
-    const [form, setForm] = useState<User>({} as User);;
+    const [form, setForm] = useState<User>({} as User);
     const navigate = useNavigate()
 
     const handleSubmit = async (event: React.FormEvent<EventTarget>) => {

@@ -31,6 +31,13 @@ export const authApi = createApi({
                 body
             })
         }),
+        addPictureUser: builder.mutation<void , FormData>({
+            query : (body)=>({
+                url:'/account/picture',
+                method: 'POST',
+                body
+            })
+        }),
 
     
         userLogin: builder.mutation<AuthState, LoginDTO>({
@@ -58,4 +65,4 @@ export const authApi = createApi({
     })
 })
 
-export const {useGetUserProjectsQuery, useUpdatePasswordUserMutation , useUpdateUserProfileMutation ,useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
+export const {useGetUserProjectsQuery, useAddPictureUserMutation, useUpdatePasswordUserMutation , useUpdateUserProfileMutation ,useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
