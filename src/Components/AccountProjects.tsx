@@ -19,7 +19,9 @@ export default function AccountProjects() {
         <article className="grid grid-cols-3 gap-4 mt-5">
           {data && data!.map((items: Project) =>
             <div key={items.id}>
-              <OneCard project={items} />
+              <OneCard
+                project={items}
+                isUserProject={true} />
             </div>
           )}
         </article>

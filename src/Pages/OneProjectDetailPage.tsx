@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { RouterParams } from "../../App";
-import { useGetOneUserProjectQuery } from "../../App/API/authAPI"
-import { useAddConsiderationMutation, useEditConsiderationMutation } from "../../App/API/userConsiderations";
-import { Considerations } from "../../App/entities/considerations";
-import ContributionComponent from "../../Components/OneProjectComponents/ContributionComponent";
-import ModalAddContribution from "../../Components/OneProjectComponents/ModalAddEditContribution";
+import { RouterParams } from "../App";
+import { useGetOneUserProjectQuery } from "../App/API/authAPI"
+import { useAddConsiderationMutation, useEditConsiderationMutation } from "../App/API/userConsiderations";
+import { Considerations } from "../App/entities/considerations";
+import ContributionComponent from "../Components/OneProjectComponents/ContributionComponent";
+import ModalAddContribution from "../Components/OneProjectComponents/ModalAddEditContribution";
 
 
+interface Props {
+  isUser: boolean
+  queryType: Function
+}
 
 
-
-
-
-
-export default function OneProjectUserDetailPage() {
+export default function OneProjectUserDetailPage({ isUser, queryType }: Props) {
 
   const { id } = useParams<RouterParams>();
-  const { data } = useGetOneUserProjectQuery(Number(id))
+  const { data } = queryType(Number(id))
 
   // géstions des modal add et edit
   const [showModalAddContribution, setShowModalAddContribution] = useState(false);
@@ -48,7 +48,7 @@ export default function OneProjectUserDetailPage() {
                 {data?.consideration?.map((item: Considerations) =>
 
                   <ContributionComponent
-                    isUser={true} // le user peut éditer ses considérations
+                    isUser={isUser} // le user peut éditer ses considérations
                     item={item}
                     setEditConsideration={setEditConsideration}
                     setShowModalEditContribution={setShowModalEditContribution}
@@ -69,6 +69,42 @@ export default function OneProjectUserDetailPage() {
                       Par {data?.userName}
 
                     </p>
+                    {/* <div className="flex mt-2 -ml-0.5">
+                                            <svg
+                                                className="w-5 h-5 text-yellow-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+
+                                            <svg
+                                                className="w-5 h-5 text-yellow-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+
+                                            <svg
+                                                className="w-5 h-5 text-yellow-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+
+                                            <svg
+                                                className="w-5 h-5 text-yellow-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+
+                                            <svg
+                                                className="w-5 h-5 text-gray-200"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        </div> */}
                   </div>
 
 
@@ -128,7 +164,7 @@ export default function OneProjectUserDetailPage() {
                       onClick={() => setShowModalAddContribution(true)}
                       className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-redBull rounded hover:bg-redBull/60"
                     >
-                      Ajouter une contribution
+                      {isUser ? "Ajouter une contribution" : "Contribuer"}
                     </button>
                   </div>
                 </form>

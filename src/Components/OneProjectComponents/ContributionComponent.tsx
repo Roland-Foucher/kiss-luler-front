@@ -141,9 +141,9 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
               <li
                 className="inline-block items-center px-3 py-1 text-xs font-medium rounded-full"
               >
-                <button className="btn btn-danger pt-1 m-1"
+                <button className="btn btn-success pt-1 m-1"
                   onClick={() => takeConditionReady(item)}>
-                  RE-OPEN
+                  RE-OUVRIR
                 </button>
               </li>
             </>}

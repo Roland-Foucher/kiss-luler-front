@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router";
+import { useGetUserProjectsQuery } from "../App/API/authAPI";
 import { Project } from "../App/entities/project";
 import { useAppSelector } from "../App/hooks";
 
 interface Props {
   project: Project
+  isUserProject: boolean
 }
 
-export default function OneCard({project} : Props) {
-  
+export default function OneCard({ project, isUserProject }: Props) {
+
   const user = useAppSelector(state => state.auth.user);
   const navigate = useNavigate()
+
   return (
     <div>
       <div className="block p-4 shadow-lg hover:shadow-md hover:shadow-redBull/30" >
@@ -87,7 +90,7 @@ export default function OneCard({project} : Props) {
               </div>
             </div>
           </dl>
-          <button onClick={() => user ? navigate(`/user/project/${project.id}`) : navigate(`/project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
+          <button onClick={() => isUserProject ? navigate(`/user/project/${project.id}`) : navigate(`/project/${project.id}`)} className="absolute right-0 inline-block px-4 py-2 text-xs font-medium bg-yellow-400 hover:-translate-y-2 hover:duration-300">
             Voir
           </button>
         </div>
