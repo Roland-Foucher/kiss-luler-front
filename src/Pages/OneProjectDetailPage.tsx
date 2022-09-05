@@ -161,7 +161,7 @@ export default function OneProjectUserDetailPage({ isUser, queryType }: Props) {
 
                     <button
                       type="button"
-                      onClick={() => setShowModalAddContribution(true)}
+                      onClick={() => isUser ? setShowModalAddContribution(true) : null}
                       className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-redBull rounded hover:bg-redBull/60"
                     >
                       {isUser ? "Ajouter une contribution" : "Contribuer"}
