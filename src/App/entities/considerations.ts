@@ -8,4 +8,6 @@ export interface Considerations {
     photo?: string,
     projectId?: number,
     status?: ConsiderationStatus,
+
+    
 }

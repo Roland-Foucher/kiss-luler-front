@@ -6,12 +6,13 @@ import HomePage from './Pages/HomePage';
 import Footer from './Components/Footer';
 import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
-import OneProjectDetailPage from './Pages/OneProjectDetailPage';
+
 import AccountPage from './Pages/AccountPage';
 import ProtectedRoute from './App/ProtectedRoute';
-import OneProjectUserDetailPage from './Pages/OneProjectDetailPage';
 import { useGetOneProjectQuery } from './App/API/projects';
 import { useGetOneUserProjectQuery } from './App/API/authAPI';
+import CreateProject from './Pages/CreateProject';
+import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 
 
 
@@ -36,6 +37,7 @@ function App() {
             <OneProjectDetailPage isUser={true} queryType={useGetOneUserProjectQuery} />
           </ProtectedRoute>} />
         <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
+        <Route element={<ProtectedRoute><CreateProject /></ProtectedRoute>} path={"account/project/add"} />
 
       </Routes>
       <Footer />
@@ -44,3 +46,4 @@ function App() {
 }
 
 export default App;
+

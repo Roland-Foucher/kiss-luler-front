@@ -2,12 +2,11 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import Banners from './Banners'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import ModalLogin from './ModalLogin'
 import { useAppDispatch, useAppSelector } from '../App/hooks'
-import { useSelector } from 'react-redux'
 import { logout } from '../App/API/auth-slice'
+import { useNavigate } from 'react-router'
 
 
 const navigation = [
@@ -22,9 +21,9 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
 
   let user = useAppSelector(state => state.auth.user);
-  
-  const dispatch = useAppDispatch ();
-  
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Disclosure as="nav" className="bg-gray-600/20 border-b border-red-400">
@@ -101,9 +100,9 @@ export default function Navbar() {
                       {navigation.map((item) => (
                         <a
                           key={item.name}
-                          href={item.href}
+                          href={'/'}
                           className={classNames(
-                            item.current ? 'bg-transparent text-orange-400 text-base font-medium' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            item.current ? 'bg-transparent text-orange-400 text-base font-medium hover:text-orange-600' : 'text-red-300 hover:bg-red-700 hover:text-white',
                             'px-3 py-2 rounded-md text-sm font-medium'
                           )}
                           aria-current={item.current ? 'page' : undefined}
@@ -113,33 +112,27 @@ export default function Navbar() {
                       ))}
                     </div>
                   </div>
-
-                  <div className=" md:w-[584px] mx-auto bg-white  flex w-[92%] items-center rounded-full border hover:shadow-md">
-                    <div className="pl-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                    </div>
-                    <input placeholder='Cherchez un projet' type="text" className="w-full rounded-full py-[12px] pl-4 outline-none" />
-                    <div className="pr-5">
-                    </div>
-                  </div>
                 </div>
 
 
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                 
-                 
-                 {user ?<Menu as="div" className="ml-3 relative">
+
+
+                  {user ? <Menu as="div" className="ml-3 z-40 relative">
                     <div>
-                      <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                      <Menu.Button className="p-2   text-white rounded-md  flex text-lg hover:bg-gray-600/30  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellowBull/30 focus:ring-orangeBull/20">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="text-white/70 w-6 h-6 mr-1">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-redBull to-yellowBull tracking-widest font-newFont font-bold">
+                          {user?.firstName + " " + user?.lastName}
+                        </span>
+
+
                       </Menu.Button>
                     </div>
                     <Transition
@@ -156,18 +149,17 @@ export default function Navbar() {
                           {({ active }) => (
                             <a
                               href="/account"
-                              target="_blank"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Mon Compte
                             </a>
                           )}
                         </Menu.Item>
-                        
+
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick = {() => dispatch(logout())}
+                              onClick={() => { dispatch(logout()); navigate('/') }}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Déconnexion
@@ -176,8 +168,8 @@ export default function Navbar() {
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>
-                  </Menu> : <ModalLogin/> }
-                  
+                  </Menu> : <ModalLogin />}
+
                 </div>
               </div>
             </div>
@@ -203,6 +195,6 @@ export default function Navbar() {
           </>
         )}
       </Disclosure>
-      <Banners /></>
+    </>
   )
 }

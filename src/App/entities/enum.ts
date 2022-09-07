@@ -9,3 +9,10 @@ export enum ConsiderationStatus {
   READY,
   CLOSED
 }
+
+
+export enum ProjectCategory {
+  TOURDATE = "TOURDATE",
+  CD = "CD",
+  EP = "EP"
+}
