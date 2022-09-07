@@ -1,4 +1,4 @@
-import { createSlice} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { authApi } from '../API/authAPI';
 import { User } from '../entities/login';
@@ -25,7 +25,16 @@ export const slice = createSlice({
       state.token = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-    }
+    },
+    setCredentials: (
+      state, { payload } ) => {
+      state.user = payload.user
+      state.token = payload.token
+  
+      localStorage.setItem('token', String(state.token));
+      localStorage.setItem('user', JSON.stringify(state.user));
+
+  }
   },
 
   extraReducers: (builder) => {
@@ -36,14 +45,13 @@ export const slice = createSlice({
           state.user = payload.user;
           localStorage.setItem('token', String(state.token));
           localStorage.setItem('user', JSON.stringify(state.user));
-          console.log(state.token);
           
         }
       )
   }
 })
 
-export const { logout } = slice.actions
+export const { logout, setCredentials } = slice.actions
 
 export default slice.reducer
 
