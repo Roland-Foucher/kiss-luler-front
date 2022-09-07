@@ -1,25 +1,38 @@
 import React, { useState } from 'react'
-import { useAddPictureUserMutation } from '../App/API/authAPI';
+import { useDispatch } from 'react-redux';
+import { authApi, useAddPictureUserMutation } from '../App/API/authAPI';
 
 export default function UploadAccount() {
-  const [postPicture, postQuery] = useAddPictureUserMutation();
-  const [form, setForm] = useState<FormData>({} as FormData);
+  const [postPicture] = useAddPictureUserMutation();
+  const [imageFile, setImageFile] = useState({} as File | null);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
+
     event.preventDefault();
     const formData = new FormData();
 
-    formData.append('file', data)
-    await postPicture(formData).unwrap();
+    // si pas de fichier on requête la route sans fichier
+    if (imageFile) {
+      formData.append("file", imageFile, imageFile.name)
+    }
+
+    try {
+      await postPicture(formData).unwrap();
+      dispatch(authApi.util.invalidateTags(["User"]));  // refresh le projet
+
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const handleChange = (event: React.FormEvent<EventTarget>) => {
     let target = event.target as HTMLInputElement;
-    let name = target.name;
-    let value = target.value
-    let change = { ...form, [name]: value }
-    console.log(target)
-    setForm(change)
+    if (target.files != null) {
+      setImageFile(target.files[0])
+    } else {
+      setImageFile(null); // passe le file null si pas dans le formulaire
+    }
   }
 
   return (
