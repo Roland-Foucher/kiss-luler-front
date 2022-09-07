@@ -1,8 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { AuthState } from './auth-slice';
-import { LoginDTO, User } from '../entities/login';
+import { LoginDTO, User, UserWithToken } from '../entities/login';
 import { prepare } from '../utils/token';
 import { Project } from '../entities/project';
+import { UpdatePasswordUSerDTO, UpdateUserDTO } from '../entities/updateUser';
 
 
 export const authApi = createApi({
@@ -16,6 +17,30 @@ export const authApi = createApi({
             providesTags: ['User']
         }),
 
+        updateUserProfile: builder.mutation<UserWithToken, UpdateUserDTO>({
+            query: (body)=>({
+                url:'/account/update',
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags:['User']
+        }),
+        updatePasswordUser: builder.mutation<void, UpdatePasswordUSerDTO>({
+            query: (body)=>({
+                url:'/account/password',
+                method: 'PATCH',
+                body
+            }),
+            invalidatesTags:['User']
+        }),
+        addPictureUser: builder.mutation<void , FormData>({
+            query : (body)=>({
+                url:'/account/picture',
+                method: 'POST',
+                body
+            }),
+            invalidatesTags:['User']
+        }),
 
     
         userLogin: builder.mutation<AuthState, LoginDTO>({
@@ -43,4 +68,4 @@ export const authApi = createApi({
     })
 })
 
-export const {useGetUserProjectsQuery, useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi
+export const {useGetUserProjectsQuery, useAddPictureUserMutation, useUpdatePasswordUserMutation , useUpdateUserProfileMutation ,useUserLoginMutation, useUserRegisterMutation, useGetOneUserProjectQuery} = authApi

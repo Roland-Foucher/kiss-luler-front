@@ -1,3 +1,4 @@
+import { UserAddIcon } from "@heroicons/react/outline";
 import { Role } from "./enum";
 
 
@@ -23,4 +24,9 @@ export interface User {
   birthdate?: Date;
   photo?: string;
   pseudo?: string;
+}
+
+export interface UserWithToken {
+  fullUserDto: User,
+  token: string
 }

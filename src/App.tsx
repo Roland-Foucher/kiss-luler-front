@@ -9,6 +9,9 @@ import { RegisterPage } from './Pages/RegisterPage';
 
 import AccountPage from './Pages/AccountPage';
 import ProtectedRoute from './App/ProtectedRoute';
+import UpdateProfilePage from './Components/UpdateProfil';
+import PasswordUpdate from './Components/PasswordUpdate';
+import TabsNavUser from './Components/TabsNavUser';
 import { useGetOneProjectQuery } from './App/API/projects';
 import { useGetOneUserProjectQuery } from './App/API/authAPI';
 import CreateProject from './Pages/CreateProject';
@@ -38,6 +41,7 @@ function App() {
           </ProtectedRoute>} />
         <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
         <Route element={<ProtectedRoute><CreateProject /></ProtectedRoute>} path={"account/project/add"} />
+        <Route path="/account/profil" element={<ProtectedRoute><TabsNavUser /></ProtectedRoute>} />
 
       </Routes>
       <Footer />
