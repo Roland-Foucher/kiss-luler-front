@@ -33,7 +33,7 @@ export const authApi = createApi({
             }),
             invalidatesTags:['User']
         }),
-        addPictureUser: builder.mutation<void , FormData>({
+        addPictureUser: builder.mutation<User , FormData>({
             query : (body)=>({
                 url:'/account/picture',
                 method: 'POST',

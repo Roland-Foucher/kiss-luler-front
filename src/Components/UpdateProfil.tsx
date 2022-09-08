@@ -17,7 +17,6 @@ export default function UpdateProfile() {
   const handleSubmit = async (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
     const data: UserWithToken = await postUpdate(form).unwrap();
-    console.log(data)
     if (data) {
 
       dispatch(setCredentials(data))

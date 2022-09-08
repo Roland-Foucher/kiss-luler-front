@@ -1,5 +1,9 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { setCredentials, setUser } from '../App/API/auth-slice';
+import { authApi, useAddPictureUserMutation } from '../App/API/authAPI';
+import { User, UserWithToken } from '../App/entities/login';
 import { scrollToTop, useAppSelector } from "../App/hooks";
 
 
@@ -9,7 +13,46 @@ import { scrollToTop, useAppSelector } from "../App/hooks";
 export default function AccountDetails() {
 
   const user = useAppSelector(state => state.auth.user);
+
   const navigate = useNavigate();
+
+  const formData = new FormData();
+
+  const dispatch = useDispatch();
+
+  const [postPicture] = useAddPictureUserMutation();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
+  const handleFileChange = async (event: any) => {
+    const imageFile = event.target.files && event.target.files[0];
+    if (!imageFile) {
+      return;
+    }
+    formData.append("file", imageFile, imageFile.name)
+
+    try {
+      const data: User = await postPicture(formData).unwrap();
+
+      if (data) {
+        console.log(data)
+        setTimeout(() => {
+          dispatch(setUser(data))
+          dispatch(authApi.util.invalidateTags(["User"]));
+        }, 1000);
+        // refresh le projet
+      }
+
+
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
 
   return (
     <>
@@ -37,15 +80,21 @@ export default function AccountDetails() {
 
                 {/**photo de profil */}
                 <div className="absolute top-22 left-8 md:top-18 ml-2 w-64 text-center ">
+                  <input
+                    style={{ display: 'none' }}
+                    ref={inputRef}
+                    type="file"
+                    onChange={handleFileChange}
+                  />
                   {user?.photo ? <div className="w-22">
                     <img className="w-32 h-32 rounded-full absolute md:h-40 md:w-40 object-cover" src={user.photo} alt="" />
                     <div className="w-32 h-32 md:h-40 md:w-40 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">
-                      <img className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
+                      <img onClick={handleClick} className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
                     </div>
                   </div> : <div className="w-22">
                     <img className="w-32 h-32 rounded-full absolute md:h-40 md:w-40 object-cover" src={process.env.PUBLIC_URL + '/img/tourterelle.jpg'} alt="" />
                     <div className="w-32 h-32 md:h-40 md:w-40 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">
-                      <img onClick={() => navigate('/profil/picture')} className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
+                      <img onClick={handleClick} className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
                     </div>
                   </div>}
                 </div>
@@ -73,9 +122,9 @@ export default function AccountDetails() {
         >
           <span
             className="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-gray-600/80 via-orange-400/60 to-red-600/60"
-          ></span> 
+          ></span>
 
-          
+
           <div className="justify-between sm:flex my-8 ">
             <div>
               <h5 className="text-4xl font-medium text-gray-900 font-newFont">
@@ -134,4 +183,5 @@ export default function AccountDetails() {
       {/* fin card user */}
     </>
   )
-};
+}
+
