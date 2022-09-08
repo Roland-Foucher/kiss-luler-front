@@ -34,7 +34,12 @@ export const slice = createSlice({
       localStorage.setItem('token', String(state.token));
       localStorage.setItem('user', JSON.stringify(state.user));
 
-  }
+    },
+    setUser: (
+      state, { payload }:{payload: User} ) => {
+        state.user = payload;
+        localStorage.setItem('user', JSON.stringify(state.user));
+      }
   },
 
   extraReducers: (builder) => {
@@ -51,7 +56,7 @@ export const slice = createSlice({
   }
 })
 
-export const { logout, setCredentials } = slice.actions
+export const { logout, setCredentials, setUser } = slice.actions
 
 export default slice.reducer
 
