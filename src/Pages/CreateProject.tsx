@@ -348,7 +348,7 @@ export default function CreateProject() {
                 </div>}
 
                 {succes && <div
-                    className="  fixed bottom-1/3 left-1/3   flex items-center justify-between  p-20 text-green-700 border-1 rounded border-green-600 bg-green-50/40"
+                    className="  fixed bottom-1/3 left-1/3   flex items-center justify-between  p-20 text-green-700  rounded  bg-gray-700/30"
                     role="alert"
 
                 >   <Confetti
@@ -377,7 +377,7 @@ export default function CreateProject() {
                             </svg>
                         </span>
                         <strong className="text-xl font-medium">Projet enregistré</strong> 
-                        <button onClick={() => navigate(`/project/${resultId}`)} className="absolute bottom-2  right-10 left-10  p-2 bg-green-700/20 rounded-md hover:border hover:border-green-700">Voir</button>
+                        <button onClick={() => navigate(`/project/${resultId}`)} className="border-1 border-green-600 absolute bottom-2  right-10 left-10  p-2 bg-green-700/20 rounded-md hover:border hover:border-green-800">Voir</button>
                     </div>
 
 

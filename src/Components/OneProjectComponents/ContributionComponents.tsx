@@ -90,7 +90,7 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
               <div
                 className="absolute inline-flex p-2 bg-white/60 rounded-lg shadow-xl -bottom-8 -right-4 text-center"
               >
-                <span className="inline-block w-10 h-8 bg-gray-100 rounded-lg"> {item.considAmount} € </span>
+                <span className="inline-block w-10 h-8 bg-gray-100 rounded-lg text-gray-600"> {item.considAmount}€ </span>
               </div>
             </div>
 

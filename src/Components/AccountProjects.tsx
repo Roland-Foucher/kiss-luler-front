@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router";
 import { useGetUserProjectsQuery } from "../App/API/authAPI";
 import { Project } from "../App/entities/project";
+import { scrollToTop } from "../App/hooks";
 
 
 import OneCard from "./OneCard";
 
 
 export default function AccountProjects() {
+
+
 
   const navigate = useNavigate()
 
@@ -25,7 +28,7 @@ export default function AccountProjects() {
         <p className="font-light text-gray-400 text-xl my-3 mx-10">Vous avez actuellement {data?.length} projet.s </p>
 
         <button
-          onClick={() => navigate('/account/project/add')}
+          onClick={() => {navigate('/account/project/add'); scrollToTop()}}
           className="z-10 p-4 text-orangeBull  text-lg bg-orangeBull/10 border-1 border-orangeBull/50 rounded-full xl:visible lg:visible md:invisible sm:invisible   transition-all active:bg-green-50   hover:scale-110 focus:outline-none focus:ring"
           type="button"
         >

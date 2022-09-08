@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { RouterParams } from "../App";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 import { useAddConsiderationMutation, useEditConsiderationMutation } from "../App/API/userConsiderations";
 import { Considerations } from "../App/entities/considerations";
 import ContributionComponent from "../Components/OneProjectComponents/ContributionComponents";
 import ModalAddEditContribution from "../Components/OneProjectComponents/ModalAddEditContribution";
+import { scrollToTop } from "../App/hooks";
 
 
 
@@ -21,7 +23,11 @@ interface Props {
 export default function OneProjectDetailPage({ isUser, queryType }: Props) {
 
   const { id } = useParams<RouterParams>();
-  const { data } = queryType(Number(id))
+  const { data, isLoading } = queryType(Number(id))
+
+  const [top, setTop] = useState(true)
+
+  top && scrollToTop()
 
 
   const [showModalAddContribution, setShowModalAddContribution] = useState(false);
@@ -37,6 +43,9 @@ export default function OneProjectDetailPage({ isUser, queryType }: Props) {
   return (
     <>
 
+      {isLoading && <div className="text-center mt-10">
+        <PropagateLoader color="#f4845f" />
+      </div>}
 
       <section className="mx-14 ">
         <header className="flex font-light my-8">
