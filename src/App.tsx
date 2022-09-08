@@ -16,6 +16,7 @@ import { useGetOneProjectQuery } from './App/API/projects';
 import { useGetOneUserProjectQuery } from './App/API/authAPI';
 import CreateProject from './Pages/CreateProject';
 import OneProjectDetailPage from './Pages/OneProjectDetailPage';
+import UploadPicture from './Pages/UploadPicture';
 
 
 
@@ -42,6 +43,10 @@ function App() {
         <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
         <Route element={<ProtectedRoute><CreateProject /></ProtectedRoute>} path={"account/project/add"} />
         <Route path="/account/profil" element={<ProtectedRoute><TabsNavUser /></ProtectedRoute>} />
+
+        <Route element={<ProtectedRoute><UploadPicture /></ProtectedRoute>} path={"profil/picture"} />
+       
+        
 
       </Routes>
       <Footer />

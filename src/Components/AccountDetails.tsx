@@ -45,7 +45,7 @@ export default function AccountDetails() {
                   </div> : <div className="w-22">
                     <img className="w-32 h-32 rounded-full absolute md:h-40 md:w-40 object-cover" src={process.env.PUBLIC_URL + '/img/tourterelle.jpg'} alt="" />
                     <div className="w-32 h-32 md:h-40 md:w-40 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">
-                      <img className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
+                      <img onClick={() => navigate('/profil/picture')} className="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" />
                     </div>
                   </div>}
                 </div>
