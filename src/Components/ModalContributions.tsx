@@ -1,77 +1,141 @@
-import React from "react";
+import React, { useState } from "react";
+import { Considerations } from "../App/entities/considerations";
+import { useParams } from "react-router";
+import { RouterParams } from "../App";
+import { useBuyConsiderationProjectMutation } from "../App/API/projects";
+import { useAppSelector } from "../App/hooks";
+import ModalSucess from "./ModalSucess";
+import ContributionComponent from "./OneProjectComponents/ContributionComponents";
 
-export default function ModalContributions() {
+interface Props {
+    isUser: boolean
+    queryType: Function
+}
 
-    const [showModal, setShowModal] = React.useState(false);
 
+export default function ModalContributions({ isUser, queryType }: Props) {
+
+    const [showModalSaveContribution, setShowModalSaveContibution] = React.useState(false);
+    const user = useAppSelector(state => state.auth.user);
+    const [showModalSuccess, setShowModalSuccess] = useState(false);
+
+    const [postBuyConsideration, postQuery] = useBuyConsiderationProjectMutation();
+
+    const { id } = useParams<RouterParams>();
+    const { data } = queryType(Number(id));
+
+    const [checkConsideration, setCheckConsideration] = useState(0);
+
+    function handleClick(event: React.FormEvent<EventTarget>, id: number | undefined) {
+        event.preventDefault();
+
+        if (user && id) {
+            setCheckConsideration(id)
+            console.log('Le lien a été cliqué.', id);
+        }
+    }
+
+    function handleSubmit() {
+        if (checkConsideration) {
+            postBuyConsideration(checkConsideration).unwrap()
+            console.log('ok check', checkConsideration)
+            setShowModalSaveContibution(false)
+            setShowModalSuccess(true)
+        } else {
+            console.log('vous navez pas selectionner de Consid')
+        }
+
+    }
 
 
     return (
-
-        <>
-            <button onClick={() => setShowModal(true)} type="button" data-modal-toggle="crypto-modal" className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
-                <svg aria-hidden="true" className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                Choisissez votre contribution
+        <div className="relative">
+            <button
+                onClick={() => setShowModalSaveContibution(true)}
+                className="mt-3 group relative flex justify-center py-2 px-2 w-full bg-redBull  font-light text-lg text-white  rounded-sm  hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button">
+                Contribuer au projet
             </button>
 
-            {showModal ? (
+            {showModalSaveContribution ? (
                 <>
-                    <div id="crypto-modal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-                        <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-
-                            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="crypto-modal">
-                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                    <span className="sr-only">Close modal</span>
-                                </button>
-
-                                <div className="py-4 px-6 rounded-t border-b dark:border-gray-600">
-                                    <h3 className="text-base font-semibold text-gray-900 lg:text-xl dark:text-white">
-                                        Connect wallet
+                    <div
+                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    >
+                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                            {/*content*/}
+                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                {/*header*/}
+                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                    <h3 className="text-3xl font-semibold">
+                                        Faites votre choix et contribuer au projet
                                     </h3>
+                                    <button
+                                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                        onClick={() => setShowModalSaveContibution(false)}
+                                    >
+                                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                            ×
+                                        </span>
+                                    </button>
+                                </div>
+                                {/*body*/}
+                                <div className="relative p-6 flex-auto">
+                                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                        Merci de choisir votre contribution
+                                    </p>
                                 </div>
 
-                                <div className="p-6">
-                                    <p className="text-sm font-normal text-gray-500 dark:text-gray-400">Connect with one of our available wallet providers or create a new one.</p>
-                                    <ul className="my-4 space-y-3">
-                                        <li>
-                                            <a href="#" className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                                <span className="flex-1 ml-3 whitespace-nowrap">MetaMask</span>
-                                                <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">Popular</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                                <span className="flex-1 ml-3 whitespace-nowrap">Coinbase Wallet</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                                <span className="flex-1 ml-3 whitespace-nowrap">Opera Wallet</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                                <span className="flex-1 ml-3 whitespace-nowrap">WalletConnect</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                                                <span className="flex-1 ml-3 whitespace-nowrap">Fortmatic</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div>
-                                        <a href="#" className="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
-                                            Why do I need to connect with my wallet?</a>
-                                    </div>
+                                <div
+
+                                    className="mt-20">
+                                    {data?.consideration?.map((item: Considerations) =>
+                                        <div
+                                            onClick={(e) => handleClick(e, item.id)}
+                                        >
+                                            <ContributionComponent
+                                                key={item.id}
+                                                isUser={false}
+                                                item={item}
+                                                isActive={checkConsideration === item.id}
+                                                setEditConsideration={null}
+                                                setShowModalEditContribution={null}
+                                            />
+
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/*footer*/}
+                                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                    <button
+                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button"
+                                        onClick={() => setShowModalSaveContibution(false)}
+                                    >
+                                        Fermer
+                                    </button>
+
+                                    {checkConsideration ? (
+                                        <button
+                                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => handleSubmit()}
+                                        >
+                                            Valider mon choix de contribution
+                                        </button>
+
+                                    ) : <div><p>Vous n'avez pas selectionner de contribution</p></div>}
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>
-            ) : null
-            }
-        </>
-    )
+            ) : null}
+            <ModalSucess showModal={showModalSuccess} closeModal={() => setShowModalSuccess(false)} />
+        </div>
+    );
 }
+

@@ -14,7 +14,7 @@ import { useGetOneProjectQuery } from './App/API/projects';
 import { useGetOneUserProjectQuery } from './App/API/authAPI';
 import CreateProject from './Pages/CreateProject';
 import OneProjectDetailPage from './Pages/OneProjectDetailPage';
-import ModalContributions from './Components/ModalContributions';
+
 
 
 
@@ -31,6 +31,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />
@@ -44,8 +45,6 @@ function App() {
         <Route path="/account/profil" element={<ProtectedRoute><TabsNavUser /></ProtectedRoute>} />
 
 
-
-        <Route path="/save" element={<ModalContributions />} />
 
       </Routes>
       <Footer />

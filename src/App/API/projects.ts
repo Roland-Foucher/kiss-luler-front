@@ -40,8 +40,15 @@ export const projectApi = createApi({
                 
             }),
             invalidatesTags: ['projectsList']
+        }),
+        buyConsiderationProject : builder.mutation<void , number>({
+            query : (id) => ({
+                url : '/buy-consideration/' + id , 
+                method : 'POST',
+            }),
+            invalidatesTags : ['projectsList']
         })
     })
 })
 
-export const { useGetAllProjectsQuery, useGetOneProjectQuery, useAddProjectMutation, useDeleteProjectMutation } = projectApi;
+export const { useGetAllProjectsQuery, useGetOneProjectQuery, useAddProjectMutation, useDeleteProjectMutation, useBuyConsiderationProjectMutation } = projectApi;
