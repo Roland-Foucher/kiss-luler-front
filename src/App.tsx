@@ -18,6 +18,7 @@ import OneProjectDetailPage from './Pages/OneProjectDetailPage';
 
 
 
+
 export type RouterParams = {
   id: string
 }
@@ -30,6 +31,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<HomePage />} />

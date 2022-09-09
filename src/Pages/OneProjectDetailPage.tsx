@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { RouterParams } from "../App";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import { useGetOneProjectQuery } from "../App/API/projects";
 
 import { useAddConsiderationMutation, useEditConsiderationMutation } from "../App/API/userConsiderations";
 import { Considerations } from "../App/entities/considerations";
+import { useAppSelector } from "../App/hooks";
+import ModalContributions from "../Components/ModalContributions";
+import ModalLogin from "../Components/ModalLogin";
 import ContributionComponent from "../Components/OneProjectComponents/ContributionComponents";
 import ModalAddEditContribution from "../Components/OneProjectComponents/ModalAddEditContribution";
 import { scrollToTop } from "../App/hooks";
-
 
 
 interface Props {
@@ -17,10 +20,8 @@ interface Props {
 }
 
 
-
-
-
 export default function OneProjectDetailPage({ isUser, queryType }: Props) {
+  const user = useAppSelector(state => state.auth.user);
 
   const { id } = useParams<RouterParams>();
   const { data, isLoading } = queryType(Number(id))
@@ -28,7 +29,6 @@ export default function OneProjectDetailPage({ isUser, queryType }: Props) {
   const [top, setTop] = useState(true)
 
   top && scrollToTop()
-
 
   const [showModalAddContribution, setShowModalAddContribution] = useState(false);
   const [showModalEditContribution, setShowModalEditContribution] = useState(false);
@@ -116,20 +116,26 @@ export default function OneProjectDetailPage({ isUser, queryType }: Props) {
 
         </aside>
 
-        {isUser ? <button onClick={() => isUser ? setShowModalAddContribution(true) : null}
-
+        {isUser ? <button
+          onClick={() => isUser ? setShowModalAddContribution(true) : null}
           className="mt-3 group relative flex justify-center py-2 px-2 w-full bg-redBull  font-light text-lg text-white  rounded-sm  hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
         >
           Ajouter une contribution
-        </button> : <button
+        </button> :
 
-          className="mt-3 group relative flex justify-center py-2 px-2 w-full bg-redBull  font-light text-lg text-white  rounded-sm  hover:ring-2 focus: mr-1 mb-1 ease-linear transition-all duration-150"
-        >
-          Je contribue à partir de 1 €
-        </button>}
+          user ?
 
+            <ModalContributions isUser={false} queryType={useGetOneProjectQuery} />
 
+            :
+            <>
+              <div className="flex-col">
+                <p>Connecter vous pour pouvoir contribuer à un projet</p>
+                <ModalLogin />
+              </div>
 
+            </>
+        }
 
 
         <article className="flex font-light mt-6">
@@ -169,28 +175,17 @@ export default function OneProjectDetailPage({ isUser, queryType }: Props) {
         {/* Liste des considérations */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-3 flex-wrap md:grid md:grid-cols-2  md:gap-3  mt-5">
           {data?.consideration?.map((item: Considerations) =>
-
-
             <ContributionComponent
               isUser={isUser} // le user peut éditer ses considérations
               item={item}
               setEditConsideration={setEditConsideration}
-              setShowModalEditContribution={setShowModalEditContribution}
-            />
-
-
-
+              setShowModalEditContribution={setShowModalEditContribution} 
+              isActive={false}            
+              />
           )}
         </div>
 
-
-
-
-
       </section>
-
-
-
 
     </>
   )
