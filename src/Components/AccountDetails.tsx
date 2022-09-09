@@ -150,7 +150,7 @@ export default function AccountDetails() {
           <article className='lg:flex lg:justify-evenly  flex-wrap '>
             <dl className="flex mt-6  ">
               <div className="flex flex-col-reverse">
-                <dt className="text-lg font-medium text-gray-600 font-newFont"> Viticulteur </dt>
+                <dt className="text-lg font-medium text-gray-600 font-newFont text-center"> {user?.job ? user.job : "-"} </dt>
                 <dd className="text-xs font-medium text-gray-500">Job</dd>
               </div>
 
@@ -169,6 +169,11 @@ export default function AccountDetails() {
               <div className="flex flex-col-reverse ml-3 lg:ml-6">
                 <dt className="text-lg font-medium text-gray-600 font-newFont"> {user?.email} </dt>
                 <dd className="text-xs font-medium text-gray-500">Email</dd>
+              </div>
+
+              <div className="flex flex-col-reverse ml-3 lg:ml-6">
+                <dt className="text-lg font-medium text-gray-600 font-newFont text-center"> {user?.pseudo ? user.pseudo : "-"} </dt>
+                <dd className="text-xs font-medium text-gray-500">Pseudo</dd>
               </div>
             </dl>
             <div>
