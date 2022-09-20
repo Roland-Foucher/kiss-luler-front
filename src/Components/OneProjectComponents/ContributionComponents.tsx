@@ -67,10 +67,7 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
 
     return (
         <>
-            <div className="absolute inline-flex p-2 bg-white/60 rounded-lg shadow-xl -bottom-8 -right-4 text-center">
-                <span className="inline-block w-10 h-8 bg-gray-100 rounded-lg text-gray-600"> {item.considAmount}€ </span>
-            </div>
-
+        
             <div className="max-w-2xl px-4 py-8 mx-auto"
             >
                 <section className="shadow-md border border-yellowBull p-8 bg-gray-100 rounded-lg"
@@ -97,9 +94,9 @@ export default function ContributionComponent({ item, isUser, setShowModalEditCo
                             </div>
 
                             <div
-                                className="absolute inline-flex p-2 bg-white/60 rounded-lg shadow-xl -bottom-8 -right-4 text-center"
+                                className="absolute inline-flex p-2 bg-white/60 rounded-lg shadow-xl -bottom-8 -right-4 text-sm text-center"
                             >
-                                <span className="inline-block w-10 h-8 bg-gray-100 rounded-lg"> {item.considAmount} € </span>
+                                <span className="inline-block w-10 h-8 bg-gray-100 rounded-lg"> {item.considAmount}€ </span>
                             </div>
                         </div>
 

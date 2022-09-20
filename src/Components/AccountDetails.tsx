@@ -1,9 +1,9 @@
-import React, { CSSProperties, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { setCredentials, setUser } from '../App/API/auth-slice';
+import { setUser } from '../App/API/auth-slice';
 import { authApi, useAddPictureUserMutation } from '../App/API/authAPI';
-import { User, UserWithToken } from '../App/entities/login';
+import { User } from '../App/entities/login';
 import { scrollToTop, useAppSelector } from "../App/hooks";
 
 

@@ -16,7 +16,7 @@ export const store = configureStore({
         auth: authSlice,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(authApi.middleware, projectApi.middleware),
+        getDefaultMiddleware().concat(authApi.middleware, projectApi.middleware, userConsiderationApi.middleware),
 });
 
 
